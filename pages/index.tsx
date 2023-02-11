@@ -207,7 +207,7 @@ const Home: NextPage = () => {
             rows={4}
             className="w-full mt-5 rounded-lg shadow-sm focus:outline-none focus:shadow-outline"
             placeholder={
-              "For example, 'The Impact of Climate Change on Our Planet', 'Shakespeare's Romeo and Juliet: Love, Tragedy, and Fate', 'The Life Cycle of a Butterfly', 'Saving Water: Why Conservation Matters', 'Energy', 'Planet Mars', or 'Orange Fruit'."
+              "For example, The Impact of Climate Change on Our Planet, Shakespeares Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water, Energy, Planet Mars, or Orange Fruit."
             }
           />
           <div className="flex mt-10 items-center align-items-center">

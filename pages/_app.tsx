@@ -1,11 +1,8 @@
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
-import { Inter } from "@next/font/google";
+import localFont from '@next/font/local'
 
-const inter = Inter({
-  weight: "300",
-  subsets: ["latin"],
-});
+const inter = localFont({ src: '../styles/Inter-Light.ttf' })
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
