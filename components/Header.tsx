@@ -11,7 +11,7 @@ export default function Header() {
           width={36}
           height={36}
         />
-        <h1 className="ml-2 text-3xl font-bold text-slate-900 tracking-normal sm:text-5xl">
+        <h1 className="ml-2 text-3xl font-bold text-slate-900 tracking-tight sm:text-5xl">
           BetterReading
         </h1>
       </a>
