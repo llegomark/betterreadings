@@ -26,9 +26,6 @@ const Home: NextPage = () => {
   const prompt = `Write a complete, coherent, and detailed reading passage on the topic of ${verse} for a ${bible} audience. Suggest a catchy title on the beginning. The passage should be between 300-600 words, and include a variety of vocabulary words appropriate for the grade level. Use clear and simple language, with short and simple sentences, and avoid using complex sentence structures or technical terms. To help students understand the material, use visuals such as images or diagrams. Highlight important vocabulary words and provide definitions or explanations. At the end of the passage, include 5-10 comprehension questions that will test the students' ability to understand and analyze the material. These questions should include a mix of multiple choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should also cover a variety of topics, such as vocabulary, sequencing, cause and effect relationships, identifying main ideas, and making inferences. In addition, provide a summary of the passage to help reinforce the main ideas and concepts. Encourage students to ask questions and participate in discussions about the material, to help them better understand and retain the information, as well as provide opportunities for critical thinking and analysis. The passage should be written in a natural, clear, flowing, and engaging style, as if it were written by a human.
   }`;
 
-  //   const prompt = `As a language expert, please write a reading passage on the topic of ${verse} for a ${bible} audience. Suggest a title. The passage should be between 300-600 words and include a variety of vocabulary words and sentence structures appropriate for the grade level. At the end of the passage, please include 5-10 comprehension questions that will test the students' ability to understand and analyze the material. The questions may include topics such as vocabulary, sequencing, cause and effect relationships, identifying main ideas, and making inferences.
-  // }`;
-
   switch (bible) {
     case "Grade 1":
     case "Grade 2":
@@ -208,22 +205,6 @@ const Home: NextPage = () => {
                     </h2>
                   </div>
                   <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto px-3">
-                    {/* <div
-                      className="bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-copy border"
-                      onClick={() => {
-                        navigator.clipboard.writeText(`${generatedVerses}`);
-                        toast("Generated Passage Copied!", {
-                          icon: "✂️",
-                        });
-                      }}
-                    >
-                      <p
-                        className="text-base leading-tight text-justify"
-                        dangerouslySetInnerHTML={{
-                          __html: generatedVerses.replace(/\n/g, "<br>"),
-                        }}
-                      />
-                    </div> */}
                     <div
                       className="bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-copy border"
                       onClick={() => {
@@ -233,7 +214,7 @@ const Home: NextPage = () => {
                         });
                       }}
                     >
-                      <p className="text-base leading-tight text-justify">
+                      <p className="text-base leading-normal text-justify">
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {line}
@@ -242,7 +223,15 @@ const Home: NextPage = () => {
                         ))}
                       </p>
                     </div>
-                    <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light leading-tight rounded-lg text-xs mt-2">
+                    <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-base mt-2">
+                      <span>
+                        If you desire a different version of the same topic or
+                        are unsatisfied with the generated passage, simply click
+                        the "Generate Passage" button again. To copy the current
+                        generated passage to your clipboard, click it.
+                      </span>
+                    </p>
+                    <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-base mt-2">
                       <span>
                         Disclaimer: The AI-generated reading passages on our
                         website are intended to be used as a supplementary tool
