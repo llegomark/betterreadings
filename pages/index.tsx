@@ -116,7 +116,8 @@ const Home: NextPage = () => {
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
         <title>
-          Your Child's Personal AI Reading Companion - Better Reading
+          BetterReading: Personalized Reading Passages for Improved Student
+          Learning
         </title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -124,14 +125,16 @@ const Home: NextPage = () => {
       <Header />
       <main className="sm:mt-15 mt-12 flex flex-1 flex-col items-center justify-center px-4 text-center">
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
-          Unlock Your Child's Reading Potential with AI-Created Passages for
-          Every Grade Level!
+          Take Your Students' Reading Skills to the Next Level with
+          BetterReading
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
-          Our website harnesses the power of AI to generate reading passages
-          that are tailored to your child's grade level. Whether they are just
-          starting out or ready for a challenge, our passages are designed to
-          help improve their reading skills, comprehension, and confidence.
+          Our AI-generated reading passages are tailored to each student's grade
+          level and designed to improve their reading skills, comprehension, and
+          confidence. Say goodbye to generic reading materials and hello to
+          personalized, engaging content that will inspire your students to read
+          and learn. Get started today and give your students the tools they
+          need to succeed.
         </p>
         <div className="max-w-xl w-full px-6">
           <div className="flex mt-10 items-center align-items-center">
