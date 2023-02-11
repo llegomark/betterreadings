@@ -127,8 +127,7 @@ const Home: NextPage = () => {
   };
 
   const isDisabled = () => {
-    const trimmedTopic = topic.trim();
-    if (trimmedTopic.length === 0) {
+    if (topic === "") {
       return true;
     } else {
       return false;
@@ -136,8 +135,8 @@ const Home: NextPage = () => {
   };
 
   const limitCharacters = (e: any) => {
-    if (e.target.value.length > 1500) {
-      e.target.value = e.target.value.substr(0, 1500);
+    if (e.target.value.length > 100) {
+      e.target.value = e.target.value.substr(0, 100);
       toast.error("You have reached the maximum number of characters.");
     }
   };
@@ -267,7 +266,7 @@ const Home: NextPage = () => {
                         });
                       }}
                     >
-                      <p className="text-base leading-normal text-justify">
+                      <p className="text-base leading-normal text-start">
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {line}
@@ -276,14 +275,14 @@ const Home: NextPage = () => {
                         ))}
                       </p>
                     </div>
-                    <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2">
+                    <p className="flex bg-yellow-200 p-3 text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2 text-start">
                       <span>
                         Did you encounter any issues generating a passage? Try
                         refreshing the page and generating a new passage. If the
                         issue persists, please email me at markllego@gmail.com.
                       </span>
                     </p>
-                    <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2">
+                    <p className="flex bg-yellow-200 p-3 text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2 text-start">
                       <span>
                         To get a different version of the same topic at a
                         different grade level, select the desired grade level
@@ -293,7 +292,7 @@ const Home: NextPage = () => {
                         the current passage to your clipboard, simply click it.
                       </span>
                     </p>
-                    <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2">
+                    <p className="flex bg-yellow-200 p-3 text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2 text-start">
                       <span>
                         Disclaimer: The AI-generated reading passages on our
                         website are intended to be used as a supplementary tool
