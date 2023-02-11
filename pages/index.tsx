@@ -9,6 +9,7 @@ import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import { useRouter } from "next/router";
+import React from "react";
 
 const Home: NextPage = () => {
   const [response, setResponse] = useState<Record<string, unknown> | null>(
@@ -112,6 +113,8 @@ const Home: NextPage = () => {
     }
   };
 
+  const lines = generatedVerses.split("\n");
+
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
@@ -205,7 +208,7 @@ const Home: NextPage = () => {
                     </h2>
                   </div>
                   <div className="space-y-8 flex flex-col items-center justify-center max-w-xl mx-auto px-3">
-                    <div
+                    {/* <div
                       className="bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-copy border"
                       onClick={() => {
                         navigator.clipboard.writeText(`${generatedVerses}`);
@@ -220,6 +223,24 @@ const Home: NextPage = () => {
                           __html: generatedVerses.replace(/\n/g, "<br>"),
                         }}
                       />
+                    </div> */}
+                    <div
+                      className="bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-copy border"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`${generatedVerses}`);
+                        toast("Generated Passage Copied!", {
+                          icon: "✂️",
+                        });
+                      }}
+                    >
+                      <p className="text-base leading-tight text-justify">
+                        {lines.map((line, index) => (
+                          <React.Fragment key={index}>
+                            {line}
+                            <br />
+                          </React.Fragment>
+                        ))}
+                      </p>
                     </div>
                     <p className="flex bg-yellow-200 p-3 text-justify text-yellow-800 font-light leading-tight rounded-lg text-xs mt-2">
                       <span>
