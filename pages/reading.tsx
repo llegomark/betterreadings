@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import Link from "next/link";
 import Github from "../components/GitHub";
+import Balancer from "react-wrap-balancer";
 
 const Reading: NextPage = () => {
   const [response, setResponse] = useState<Record<string, unknown> | null>(
@@ -149,15 +150,19 @@ const Reading: NextPage = () => {
           <p>Source Code on Github</p>
         </a>
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
-          Let AI Choose the Perfect Reading Passage Topic for You
+          <Balancer>
+            Let AI Choose the Perfect Reading Passage Topic for You
+          </Balancer>
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
-          Struggling to find a suitable topic for your next reading passage? Let
-          our AI technology help you choose the perfect topic that will engage
-          and challenge your students. Our AI-generated reading passages are
-          tailored to meet the needs of your specific grade level and provide a
-          comprehensive learning experience for your students. Take your
-          students' reading skills to the next level with ease.
+          <Balancer>
+            Struggling to find a suitable topic for your next reading passage?
+            Let our AI technology help you choose the perfect topic that will
+            engage and challenge your students. Our AI-generated reading
+            passages are tailored to meet the needs of your specific grade level
+            and provide a comprehensive learning experience for your students.
+            Take your students' reading skills to the next level with ease.
+          </Balancer>
         </p>
         <div className="max-w-xl w-full px-6">
           <div className="flex mt-10 items-center align-items-center">
