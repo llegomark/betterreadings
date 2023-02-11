@@ -11,6 +11,7 @@ import ResizablePanel from "../components/ResizablePanel";
 import { useRouter } from "next/router";
 import React from "react";
 import Link from "next/link";
+import Github from "../components/GitHub";
 
 const Reading: NextPage = () => {
   const [response, setResponse] = useState<Record<string, unknown> | null>(
@@ -138,6 +139,15 @@ const Reading: NextPage = () => {
 
       <Header />
       <main className="sm:mt-15 mt-12 flex flex-1 flex-col items-center justify-center px-4 text-center">
+        <a
+          className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100 mb-10"
+          href="https://github.com/llegomark/betterreading"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Github />
+          <p>Source Code on Github</p>
+        </a>
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
           Let AI Choose the Perfect Reading Passage Topic for You
         </h2>
