@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import DropDown, { BibleType } from "../components/DropDown";
+import DropDown, { GradelevelType } from "../components/DropDown";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
@@ -16,17 +16,17 @@ const Home: NextPage = () => {
     null
   );
   const [loading, setLoading] = useState(false);
-  const [verse, setVerse] = useState("");
-  const [bible, setBible] = useState<BibleType>("Grade 1");
-  const [generatedVerses, setGeneratedVerses] = useState<String>("");
+  const [topic, setTopic] = useState("");
+  const [gradelevel, setGradelevel] = useState<GradelevelType>("Grade 1");
+  const [generatedTopics, setGeneratedTopics] = useState<String>("");
 
   const router = useRouter();
   useEffect(() => {}, []);
 
-  const prompt = `Write a complete, coherent, and detailed reading passage on the topic of ${verse} for a ${bible} audience. Suggest a catchy title on the beginning. The passage should be between 300-600 words, and include a variety of vocabulary words appropriate for the grade level. Use clear and simple language, with short and simple sentences, and avoid using complex sentence structures or technical terms. To help students understand the material, use visuals such as images or diagrams. Highlight important vocabulary words and provide definitions or explanations. At the end of the passage, include 5-10 comprehension questions that will test the students' ability to understand and analyze the material. These questions should include a mix of multiple choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should also cover a variety of topics, such as vocabulary, sequencing, cause and effect relationships, identifying main ideas, and making inferences. In addition, provide a summary of the passage to help reinforce the main ideas and concepts. Encourage students to ask questions and participate in discussions about the material, to help them better understand and retain the information, as well as provide opportunities for critical thinking and analysis. The passage should be written in a natural, clear, flowing, and engaging style, as if it were written by a human.
+  const prompt = `Write a complete, coherent, and detailed reading passage on the topic of ${topic} for a ${gradelevel} audience. Suggest a catchy title on the beginning. The passage should be between 300-600 words, and include a variety of vocabulary words appropriate for the grade level. Use clear and simple language, with short and simple sentences, and avoid using complex sentence structures or technical terms. To help students understand the material, use visuals such as images or diagrams. Highlight important vocabulary words and provide definitions or explanations. At the end of the passage, include 5-10 comprehension questions that will test the students' ability to understand and analyze the material. These questions should include a mix of multiple choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should also cover a variety of topics, such as vocabulary, sequencing, cause and effect relationships, identifying main ideas, and making inferences. In addition, provide a summary of the passage to help reinforce the main ideas and concepts. Encourage students to ask questions and participate in discussions about the material, to help them better understand and retain the information, as well as provide opportunities for critical thinking and analysis. The passage should be written in a natural, clear, flowing, and engaging style, as if it were written by a human.
   }`;
 
-  switch (bible) {
+  switch (gradelevel) {
     case "Grade 1":
     case "Grade 2":
     case "Grade 3":
@@ -44,9 +44,9 @@ const Home: NextPage = () => {
       throw new Error("Invalid Category");
   }
 
-  const generateVerse = async (e: any) => {
+  const generateTopic = async (e: any) => {
     e.preventDefault();
-    setGeneratedVerses("");
+    setGeneratedTopics("");
     setLoading(true);
     const response = await fetch("/api/generate", {
       method: "POST",
@@ -88,15 +88,15 @@ const Home: NextPage = () => {
       const { value, done: doneReading } = await reader.read();
       done = doneReading;
       const chunkValue = decoder.decode(value);
-      setGeneratedVerses((prev) => prev + chunkValue);
+      setGeneratedTopics((prev) => prev + chunkValue);
     }
 
     setLoading(false);
   };
 
   const isDisabled = () => {
-    const trimmedVerse = verse.trim();
-    if (trimmedVerse.length === 0) {
+    const trimmedTopic = topic.trim();
+    if (trimmedTopic.length === 0) {
       return true;
     } else {
       return false;
@@ -110,7 +110,7 @@ const Home: NextPage = () => {
     }
   };
 
-  const lines = generatedVerses.split("\n");
+  const lines = generatedTopics.split("\n");
 
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
@@ -143,19 +143,19 @@ const Home: NextPage = () => {
             </p>
           </div>
           <textarea
-            value={verse}
-            onChange={(e) => setVerse(e.target.value)}
+            value={topic}
+            onChange={(e) => setTopic(e.target.value)}
             onInput={limitCharacters}
             onKeyDown={(e) => {
               if (e.key === "Enter" && !isDisabled()) {
                 e.preventDefault();
-                generateVerse(e);
+                generateTopic(e);
               }
             }}
             rows={4}
             className="w-full mt-5 rounded-lg shadow-sm focus:outline-none focus:shadow-outline"
             placeholder={
-              "For example, 'The Impact of Climate Change on Our Planet', 'Shakespeare's Romeo and Juliet: Love, Tragedy, and Fate', 'The Life Cycle of a Butterfly', or 'Saving Water: Why Conservation Matters'."
+              "For example, 'The Impact of Climate Change on Our Planet', 'Shakespeare's Romeo and Juliet: Love, Tragedy, and Fate', 'The Life Cycle of a Butterfly', 'Saving Water: Why Conservation Matters', 'Energy', 'Planet Mars', or 'Orange Fruit'."
             }
           />
           <div className="flex mt-10 items-center align-items-center">
@@ -166,14 +166,14 @@ const Home: NextPage = () => {
           </div>
           <div className="block mt-3">
             <DropDown
-              bible={bible}
-              setBible={(newBible) => setBible(newBible)}
+              gradelevel={gradelevel}
+              setGradelevel={(newGradelevel) => setGradelevel(newGradelevel)}
             />
           </div>
           {!loading && (
             <button
               className="bg-black rounded-lg text-white text-base px-4 py-2 mt-10 hover:bg-black/80 w-full"
-              onClick={(e) => generateVerse(e)}
+              onClick={(e) => generateTopic(e)}
               disabled={isDisabled()}
             >
               Generate Passage &rarr;
@@ -197,7 +197,7 @@ const Home: NextPage = () => {
         <ResizablePanel>
           <AnimatePresence mode="wait">
             <motion.div className="space-y-10 my-10">
-              {generatedVerses && (
+              {generatedTopics && (
                 <>
                   <div>
                     <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 mx-auto px-3">
@@ -208,7 +208,7 @@ const Home: NextPage = () => {
                     <div
                       className="bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-copy border"
                       onClick={() => {
-                        navigator.clipboard.writeText(`${generatedVerses}`);
+                        navigator.clipboard.writeText(`${generatedTopics}`);
                         toast("Generated Passage Copied!", {
                           icon: "✂️",
                         });
