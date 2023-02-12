@@ -11,6 +11,7 @@ function classNames(...classes: string[]) {
 }
 
 export type GradelevelType =
+  | "Kindergarten"
   | "Grade 1"
   | "Grade 2"
   | "Grade 3"
@@ -30,6 +31,7 @@ interface DropDownProps {
 }
 
 let gradelevels: GradelevelType[] = [
+  "Kindergarten",
   "Grade 1",
   "Grade 2",
   "Grade 3",
