@@ -9,31 +9,41 @@ import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import { useRouter } from "next/router";
-import React from "react";
-import Link from "next/link";
 import Github from "../components/GitHub";
 import Balancer from "react-wrap-balancer";
+import React from "react";
 
-const Home: NextPage = () => {
-  const [response, setResponse] = useState<Record<string, unknown> | null>(
-    null
-  );
-  const [loading, setLoading] = useState(false);
-  const [topic, setTopic] = useState("");
+// This defines the types of data that the API response should have
+interface ResponseType {
+  status: number;
+  body: string;
+  headers: {
+    "X-Ratelimit-Limit": string;
+    "X-Ratelimit-Remaining": string;
+    "X-Ratelimit-Reset": string;
+  };
+}
+
+// This extends the ResponseType interface to include an optional error message
+interface ApiResponse extends ResponseType {
+  error?: string;
+}
+
+// This defines the Home component, which is a functional component with no props
+const Home: NextPage<{}> = () => {
+  // These states store the component's data and whether it is currently loading
+  const [response, setResponse] = useState<ResponseType | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [topic, setTopic] = useState<string>("");
   const [gradelevel, setGradelevel] = useState<GradelevelType>("Kindergarten");
-  const [generatedTopics, setGeneratedTopics] = useState<String>("");
+  const [generatedTopics, setGeneratedTopics] = useState<string>("");
 
   const router = useRouter();
-  useEffect(() => {}, []);
 
-  // const prompt = `Write a 300-600 word reading passage on the topic of ${topic} for a ${gradelevel} audience. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. It should accurately reflect the passage's content and encourage students to read. You aim to help students understand and analyze the material who are struggling with reading and comprehension. Use clear and simple language with short and simple sentences, and avoid using complex sentence structures or technical terms. To help students understand the information, provide clear and straightforward definitions or explanations for essential vocabulary words. Consider using examples or analogies to make the concepts easier to understand. Highlight essential vocabulary words and provide clear and straightforward definitions or explanations. At the end of the passage, including 5-10 comprehension questions to test students' understanding of the material. These questions should mix multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, main ideas, and inferences. In addition to the questions, provide a brief and concise summary of the passage to reinforce the main ideas and concepts. Please encourage students to ask questions and participate in discussions about the material to further their understanding and promote critical thinking and analysis. Write the passage in a natural, clear, flowing, and engaging style, as if a human wrote it. Your goal is to create an enjoyable, informative reading experience that helps students develop their reading and comprehension skills.
-  // }`;
+  useEffect(() => {}, []); // This useEffect hook runs once when the component mounts
 
-  // const prompt = `Act as an expert reading specialist or literacy specialist. Write a complete, coherent, and detailed reading passage on the topic of ${topic} for a ${gradelevel} audience. The passage should be written in a natural, clear, flowing, and engaging style, as if it were written by a human. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. The passage should be between 300-600 words, and include various vocabulary words appropriate for the ${gradelevel} level. For Grade Levels 1-6: Use clear and simple language, with short and simple sentences, and avoid using complex sentence structures or technical terms. To help students understand the material, use visuals and consider using examples or analogies to make the concepts easier to understand. For Grade Levels 6-12: Use clear and engaging language, with a mix of simple and complex sentence structures, and consider using technical terms when appropriate. To help students understand the material, use examples and analogies, and consider using visuals to reinforce key concepts. Highlight important vocabulary words and provide definitions or explanations. At the end of the passage, include 5-10 comprehension questions that will test the students' ability to understand and analyze the material. These questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should also cover various topics, such as vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences.
-  // }`;
-
-  const prompt =
-    gradelevel == "Kindergarten"
+  const prompt = topic
+    ? gradelevel == "Kindergarten"
       ? `As a reading specialist or literacy expert, write a simple and engaging reading passage on the topic of "${topic}" for ${gradelevel} students. The passage should be approximately 50-100 words in length, using simple vocabulary and sentence structures. The story should follow the adventures of a fictional character, such as a friendly animal or a whimsical creature. Suggest a fun and engaging title: The title should be easy to remember and relevant to the story. Consider using a character name, a simple action or event from the story, or a fun word that relates to the story. The title should be easy for Kindergarten students to understand and should encourage them to want to read the passage. In writing the passage, aim to use clear and engaging language that is accessible to Kindergarten students. Consider using colorful and engaging visuals such as illustrations, photographs, or clip art to help reinforce key concepts and to hold the students' attention. Make sure to incorporate basic vocabulary words that are familiar to Kindergarten students, such as "sun," "tree," "water," "flower," etc. At the end of the passage, include 3-5 comprehension questions that are simple and focused on basic concepts, such as identifying objects, recognizing basic shapes, or matching words to pictures. The goal of the passage is to introduce Kindergarten students to the joy of reading and to help them develop basic reading skills. By the end of the passage, students should have a basic understanding of the story and its characters, as well as a foundation for future reading success.`
       : gradelevel == "Grade 1"
       ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage on the topic of "${topic}" for a ${gradelevel} student. The passage should be approximately 100-200 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use illustrations and images, and consider using examples or analogies to make the concepts easier to understand. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 4-5 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, identifying main ideas, and making inferences. Overall, the goal of the passage is to provide students with a comprehensive and accessible introduction to "${topic}" and to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
@@ -59,30 +69,42 @@ const Home: NextPage = () => {
       ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage on the topic of "${topic}" for a ${gradelevel} student. The passage should be approximately 300-600 words in length and covering complex topics and incorporating advanced vocabulary and syntax. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies or context clues, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-10 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to provide students with a comprehensive and engaging overview of "${topic}" and to help them develop their critical thinking and analysis skills and preparing students for college-level reading and writing.`
       : gradelevel == "Grade 12"
       ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage on the topic of "${topic}" for a ${gradelevel} student. The passage should be approximately 300-600 words in length and covering complex topics and incorporating advanced vocabulary and syntax. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies or context clues, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-10 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to provide students with a comprehensive and engaging overview of "${topic}" and to help them develop their critical thinking and analysis skills and preparing students for college-level reading and writing.`
-      : "Invalid Category";
+      : "Invalid Category"
+    : gradelevel == "Kindergarten"
+    ? `As a reading specialist or literacy expert, write a simple and engaging reading passage for Kindergarten students. The passage should be approximately 50-100 words in length, using simple vocabulary and sentence structures. The story should follow the adventures of a fictional character, such as a friendly animal or a whimsical creature. Suggest a fun and engaging title: The title should be easy to remember and relevant to the story. Consider using a character name, a simple action or event from the story, or a fun word that relates to the story. The title should be easy for Kindergarten students to understand and should encourage them to want to read the passage. In writing the passage, aim to use clear and engaging language that is accessible to Kindergarten students. Consider using colorful and engaging visuals such as illustrations, photographs, or clip art to help reinforce key concepts and to hold the students' attention. Make sure to incorporate basic vocabulary words that are familiar to Kindergarten students, such as "sun," "tree," "water," "flower," etc. At the end of the passage, include 3-5 comprehension questions that are simple and focused on basic concepts, such as identifying objects, recognizing basic shapes, or matching words to pictures. The goal of the passage is to introduce Kindergarten students to the joy of reading and to help them develop basic reading skills. By the end of the passage, students should have a basic understanding of the story and its characters, as well as a foundation for future reading success.`
+    : gradelevel == "Grade 1"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 100-200 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use illustrations and images, and consider using examples or analogies to make the concepts easier to understand. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 4-5 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 2"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 100-200 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use illustrations and images, and consider using examples or analogies to make the concepts easier to understand. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 4-5 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 3"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 150-300 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-6 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 4"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 150-300 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-6 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 5"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 200-350 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-6 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 6"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 200-350 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-6 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 7"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 250-450 words in length with a focus on developing higher-level thinking skills such as inference, synthesis, and evaluation. The passages should also be longer and cover a wider range of topics, including current events, science, and literature. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be introduced and explained, as appropriate, to help students build their vocabulary and understanding. To reinforce key concepts, include examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-8 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice, short answer, and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them develop their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 8"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 250-450 words in length with a focus on developing higher-level thinking skills such as inference, synthesis, and evaluation. The passages should also be longer and cover a wider range of topics, including current events, science, and literature. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be introduced and explained, as appropriate, to help students build their vocabulary and understanding. To reinforce key concepts, include examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-8 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice, short answer, and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them develop their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
+    : gradelevel == "Grade 9"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 300-450 words in length and covering a wider range of topics and incorporating more complex language and structure. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-8 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice, short answer, and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them develop their critical thinking and analysis skills, including interpretation and evaluation as they prepare for higher level coursework in the future.`
+    : gradelevel == "Grade 10"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 300-450 words in length and covering a wider range of topics and incorporating more complex language and structure. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-8 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice, short answer, and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them develop their critical thinking and analysis skills, including interpretation and evaluation as they prepare for higher level coursework in the future.`
+    : gradelevel == "Grade 11"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 300-600 words in length and covering complex topics and incorporating advanced vocabulary and syntax. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies or context clues, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-10 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them develop their critical thinking and analysis skills and preparing students for college-level reading and writing.`
+    : gradelevel == "Grade 12"
+    ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 300-600 words in length and covering complex topics and incorporating advanced vocabulary and syntax. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies or context clues, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-10 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them develop their critical thinking and analysis skills and preparing students for college-level reading and writing.`
+    : "Invalid Category";
 
-  // switch (gradelevel) {
-  //   case "Grade 1":
-  //   case "Grade 2":
-  //   case "Grade 3":
-  //   case "Grade 4":
-  //   case "Grade 5":
-  //   case "Grade 6":
-  //   case "Grade 7":
-  //   case "Grade 8":
-  //   case "Grade 9":
-  //   case "Grade 10":
-  //   case "Grade 11":
-  //   case "Grade 12":
-  //     break;
-  //   default:
-  //     throw new Error("Invalid Category");
-  // }
-
+  // Define an asynchronous function that sends a POST request to an API route and displays the response
   const generateTopic = async (e: any) => {
-    e.preventDefault();
-    setGeneratedTopics("");
-    setLoading(true);
+    e.preventDefault(); // Stop default form submission behavior
+    setGeneratedTopics(""); // Clear any previous generated topics
+    setLoading(true); // Set the loading state to true
+
+    // Send a POST request to the API route with the prompt in the request body
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -93,23 +115,34 @@ const Home: NextPage = () => {
       }),
     });
 
-    if (!response.ok) {
-      setResponse({
+    // Handle errors when the response status is outside the 200-299 range
+    if (response.status < 200 || response.status >= 300) {
+      // Construct an error object with details about the response
+      const error: ApiResponse = {
         status: response.status,
         body: await response.text(),
         headers: {
-          "X-Ratelimit-Limit": response.headers.get("X-Ratelimit-Limit"),
+          "X-Ratelimit-Limit": response.headers.get(
+            "X-Ratelimit-Limit"
+          ) as string,
           "X-Ratelimit-Remaining": response.headers.get(
             "X-Ratelimit-Remaining"
-          ),
-          "X-Ratelimit-Reset": response.headers.get("X-Ratelimit-Reset"),
+          ) as string,
+          "X-Ratelimit-Reset": response.headers.get(
+            "X-Ratelimit-Reset"
+          ) as string,
         },
-      });
+        error: `Request failed with status code ${response.status}`,
+      };
+
+      // Set the response state to the error and show an alert to the user
+      setResponse(error);
       setLoading(false);
       alert(`Rate limit reached, try again after one minute.`);
       return;
     }
 
+    // Read the response body as a stream and update the generated topics state with each chunk of data
     const data = response.body;
     if (!data) {
       return;
@@ -126,25 +159,25 @@ const Home: NextPage = () => {
       setGeneratedTopics((prev) => prev + chunkValue);
     }
 
-    setLoading(false);
+    setLoading(false); // Set the loading state to false once the response is fully received
   };
 
-  const isDisabled = () => {
-    if (topic === "") {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  // This function limits the number of characters in a text area input
+  const limitCharacters = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    const maxCharacters = 100; // Set the maximum number of characters allowed
+    const currentCharacters = e.target.value.length; // Get the current number of characters
 
-  const limitCharacters = (e: any) => {
-    if (e.target.value.length > 100) {
-      e.target.value = e.target.value.substr(0, 100);
+    // Check if the current number of characters exceeds the maximum
+    if (currentCharacters > maxCharacters) {
+      // If it does, truncate the input value to the maximum number of characters
+      e.target.value = e.target.value.slice(0, maxCharacters);
+      // Show an error message to the user using a toast notification
       toast.error("You have reached the maximum number of characters.");
     }
   };
 
-  const lines = generatedTopics.split("\n");
+  // This line splits a string into an array of strings, with each element representing a line in the original string
+  const lines: string[] = generatedTopics.split("\n");
 
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
@@ -173,32 +206,21 @@ const Home: NextPage = () => {
           </Balancer>
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
-          <Balancer>
-            Our AI-generated reading passages are tailored to each student's
-            grade level and designed to improve their reading skills,
-            comprehension, and confidence. Say goodbye to generic reading
-            materials and hello to personalized, engaging content that will
-            inspire your students to read and learn. Get started today and give
-            your students the tools they need to succeed.
-          </Balancer>
+          Our AI-generated reading passages are tailored to each student's grade
+          level and designed to improve their reading skills, comprehension, and
+          confidence. Say goodbye to generic reading materials and hello to
+          personalized, engaging content that will inspire your students to read
+          and learn. Get started today and give your students the tools they
+          need to succeed.
         </p>
         <div className="max-w-xl w-full px-6">
           <div className="flex mt-10 items-center align-items-center">
-            <span className="text-white bg-black rounded-full w-8 h-8 text-center flex items-center justify-center leading-zero p-0">
+            <span className="text-white bg-black rounded-full text-center flex items-center justify-center leading-zero p-2 w-6 h-6">
               1
             </span>
             <p className="ml-3 text-left text-base">
-              Enter a topic for the passage.
-            </p>
-          </div>
-          <div className="flex mt-3 items-center align-items-center">
-            <p>
-              <span className="text-xs text-gray-500">
-                Can't think of a topic?{" "}
-                <Link href="reading" className="text-black underline">
-                  Click Here!
-                </Link>{" "}
-              </span>
+              Enter a theme, subject matter, or content focus. (Leave blank to
+              generate a random passage.)
             </p>
           </div>
           <textarea
@@ -206,7 +228,7 @@ const Home: NextPage = () => {
             onChange={(e) => setTopic(e.target.value)}
             onInput={limitCharacters}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && !isDisabled()) {
+              if (e.key === "Enter") {
                 e.preventDefault();
                 generateTopic(e);
               }
@@ -217,8 +239,11 @@ const Home: NextPage = () => {
               "For example, The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water, Energy, Planet Mars, or Orange Fruit."
             }
           />
+          <p className="text-gray-500 text-right mt-2 text-sm">
+            {topic.length}/100
+          </p>
           <div className="flex mt-10 items-center align-items-center">
-            <span className="text-white bg-black rounded-full w-8 h-8 text-center flex items-center justify-center leading-zero p-0">
+            <span className="text-white bg-black rounded-full text-center flex items-center justify-center leading-zero p-2 w-6 h-6">
               2
             </span>
             <p className="ml-3 text-left text-base">Select a grade level.</p>
@@ -233,7 +258,6 @@ const Home: NextPage = () => {
             <button
               className="bg-black rounded-lg text-white text-base px-4 py-2 mt-10 hover:bg-black/80 w-full font-bold"
               onClick={(e) => generateTopic(e)}
-              disabled={isDisabled()}
             >
               Generate Passage &rarr;
             </button>
@@ -282,23 +306,6 @@ const Home: NextPage = () => {
                         ))}
                       </p>
                     </div>
-                    <p className="flex bg-yellow-200 p-3 text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2 text-start">
-                      <span>
-                        Did you encounter any issues generating a passage? Try
-                        refreshing the page and generating a new passage. If the
-                        issue persists, please email me at markllego@gmail.com.
-                      </span>
-                    </p>
-                    <p className="flex bg-yellow-200 p-3 text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2 text-start">
-                      <span>
-                        To get a different version of the same topic at a
-                        different grade level, select the desired grade level
-                        from the options and click the "Generate Passage" button
-                        again. If you're not happy with the generated passage,
-                        you can use the same button to get a new one. To copy
-                        the current passage to your clipboard, simply click it.
-                      </span>
-                    </p>
                     <p className="flex bg-yellow-200 p-3 text-yellow-800 font-light tracking-normal leading-normal rounded-lg text-sm mt-2 text-start">
                       <span>
                         Disclaimer: The AI-generated reading passages on our
