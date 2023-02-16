@@ -9,7 +9,17 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        blink: "blink 1.4s linear infinite",
+      },
+      keyframes: {
+        blink: {
+          "0%, 100%": { opacity: 0.2 },
+          "20%": { opacity: 1 },
+        },
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms"), require("@headlessui/tailwindcss")],
 };
