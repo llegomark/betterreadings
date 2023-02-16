@@ -187,7 +187,6 @@ const Home: NextPage<{}> = () => {
           BetterReading: Personalized Reading Passages for Improved Student
           Learning
         </title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Header />
