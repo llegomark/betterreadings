@@ -6,10 +6,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { Fragment } from "react";
 
-function classNames(...classes: string[]) {
-  return classes.join(" ");
-}
-
+// Define the type of the `gradelevel` prop
 export type GradelevelType =
   | "Kindergarten"
   | "Grade 1"
@@ -25,34 +22,39 @@ export type GradelevelType =
   | "Grade 11"
   | "Grade 12";
 
+// Define the props for the `DropDown` component
 interface DropDownProps {
   gradelevel: GradelevelType;
   setGradelevel: (gradelevel: GradelevelType) => void;
 }
 
-let gradelevels: GradelevelType[] = [
-  "Kindergarten",
-  "Grade 1",
-  "Grade 2",
-  "Grade 3",
-  "Grade 4",
-  "Grade 5",
-  "Grade 6",
-  "Grade 7",
-  "Grade 8",
-  "Grade 9",
-  "Grade 10",
-  "Grade 11",
-  "Grade 12",
-];
-
 export const DropDown: React.FC<DropDownProps> = ({
   gradelevel,
   setGradelevel,
 }) => {
+  const gradelevels: GradelevelType[] = [
+    "Kindergarten",
+    "Grade 1",
+    "Grade 2",
+    "Grade 3",
+    "Grade 4",
+    "Grade 5",
+    "Grade 6",
+    "Grade 7",
+    "Grade 8",
+    "Grade 9",
+    "Grade 10",
+    "Grade 11",
+    "Grade 12",
+  ];
   return (
-    <Menu as="div" className="relative block text-left w-full" key={gradelevel}>
+    <Menu
+      as="div"
+      className="relative block text-left w-full"
+      key={`dropdown-${gradelevel}-${Math.random()}`}
+    >
       <div>
+        {/* The Menu.Button element renders the main button of the dropdown, which displays the currently selected grade level. */}
         <Menu.Button className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
           {gradelevel}
           <ChevronUpIcon
@@ -65,7 +67,7 @@ export const DropDown: React.FC<DropDownProps> = ({
           />
         </Menu.Button>
       </div>
-
+      {/* The Transition component handles the animation when the dropdown is opened and closed. */}
       <Transition
         as={Fragment}
         enter="transition ease-out duration-100"
@@ -75,20 +77,22 @@ export const DropDown: React.FC<DropDownProps> = ({
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
+        {/* The Menu.Items element renders the list of selectable grade levels, which appears when the dropdown button is clicked. */}
         <Menu.Items className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="overflow-y-scroll h-32">
             {gradelevels.map((gradelevelItem) => (
+              // The Menu.Item element represents a selectable item in the list of grade levels.
               <Menu.Item key={gradelevelItem}>
-                {({ active }) => (
+                {({ active }: { active: boolean }) => (
+                  // The button inside the Menu.Item element displays the grade level and allows the user to select it.
                   <button
                     onClick={() => setGradelevel(gradelevelItem)}
-                    className={classNames(
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                      gradelevel === gradelevelItem ? "bg-gray-200" : "",
-                      "px-4 py-2 text-sm w-full text-left flex items-center space-x-2 justify-between"
-                    )}
+                    className={`px-4 py-2 text-sm w-full text-left flex items-center space-x-2 justify-between ${
+                      active ? "bg-gray-100 text-gray-900" : "text-gray-700"
+                    } ${gradelevel === gradelevelItem ? "bg-gray-200" : ""}`}
                   >
                     <span>{gradelevelItem}</span>
+                    {/* The CheckIcon component displays a checkmark next to the currently selected grade level. */}
                     {gradelevel === gradelevelItem ? (
                       <CheckIcon className="w-4 h-4 text-bold" />
                     ) : null}
