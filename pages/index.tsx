@@ -9,9 +9,10 @@ import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import { useRouter } from "next/router";
-import Github from "../components/GitHub";
+import GithubIcon from "../components/GitHub";
 import Balancer from "react-wrap-balancer";
 import React from "react";
+import SocialIcon from "../components/SocialIcon";
 
 // This defines the types of data that the API response should have
 interface ResponseType {
@@ -197,7 +198,7 @@ const Home: NextPage<{}> = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Github />
+          <SocialIcon platform="github" size={25} />
           <p>Source Code on Github</p>
         </a>
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
