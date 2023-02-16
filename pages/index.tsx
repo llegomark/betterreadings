@@ -9,7 +9,7 @@ import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import { useRouter } from "next/router";
-import GithubIcon from "../components/GitHub";
+import SquigglyLines from "../components/SquigglyLines";
 import Balancer from "react-wrap-balancer";
 import React from "react";
 import SocialIcon from "../components/SocialIcon";
@@ -202,7 +202,13 @@ const Home: NextPage<{}> = () => {
         </a>
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
           <Balancer>
-            Take Your Students' Reading Skills to the Next Level
+            Take Your Students&apos;{" "}
+            <span className="relative whitespace-nowrap text-blue-700">
+              <SquigglyLines />
+              Reading Skills
+              <SquigglyLines />
+            </span>{" "}
+            to the Next Level
           </Balancer>
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
