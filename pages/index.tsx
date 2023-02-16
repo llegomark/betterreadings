@@ -9,7 +9,6 @@ import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
 import { useRouter } from "next/router";
-import SquigglyLines from "../components/SquigglyLines";
 import Balancer from "react-wrap-balancer";
 import React from "react";
 import SocialIcon from "../components/SocialIcon";
@@ -189,26 +188,21 @@ const Home: NextPage<{}> = () => {
         </title>
       </Head>
 
-      <Header />
+      <Header href="/" />
       <main className="mt-12 sm:mt-15 flex flex-1 flex-col items-center justify-center px-4 text-center">
         <a
           className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100 mb-10"
           href="https://github.com/llegomark/betterreading"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Visit Mark Anthony Llego's Github profile"
         >
           <SocialIcon platform="github" size={25} />
           <p>Source Code on Github</p>
         </a>
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
           <Balancer>
-            Take Your Students&apos;{" "}
-            <span className="relative whitespace-nowrap text-blue-700">
-              <SquigglyLines />
-              Reading Skills
-              <SquigglyLines />
-            </span>{" "}
-            to the Next Level
+            Take Your Students&apos; Reading Skills to the Next Level
           </Balancer>
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
