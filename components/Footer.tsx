@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const currentYear = () => {
+const currentYear = (): number => {
   const date = new Date();
   return date.getFullYear();
 };
