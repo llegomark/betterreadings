@@ -46,9 +46,12 @@ let gradelevels: GradelevelType[] = [
   "Grade 12",
 ];
 
-export default function DropDown({ gradelevel, setGradelevel }: DropDownProps) {
+export const DropDown: React.FC<DropDownProps> = ({
+  gradelevel,
+  setGradelevel,
+}) => {
   return (
-    <Menu as="div" className="relative block text-left w-full">
+    <Menu as="div" className="relative block text-left w-full" key={gradelevel}>
       <div>
         <Menu.Button className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
           {gradelevel}
@@ -72,10 +75,7 @@ export default function DropDown({ gradelevel, setGradelevel }: DropDownProps) {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items
-          className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-          key={gradelevel}
-        >
+        <Menu.Items className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="overflow-y-scroll h-32">
             {gradelevels.map((gradelevelItem) => (
               <Menu.Item key={gradelevelItem}>
@@ -101,4 +101,4 @@ export default function DropDown({ gradelevel, setGradelevel }: DropDownProps) {
       </Transition>
     </Menu>
   );
-}
+};
