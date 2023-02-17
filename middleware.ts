@@ -12,7 +12,7 @@ interface RatelimitInfo {
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, "60 s"),
+  limiter: Ratelimit.slidingWindow(3, "60 s"),
   ephemeralCache: new Map(),
 });
 
