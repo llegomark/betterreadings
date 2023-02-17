@@ -176,6 +176,13 @@ const Home: NextPage<{}> = () => {
   // This line splits a string into an array of strings, with each element representing a line in the original string
   const lines: string[] = generatedTopics.split("\n");
 
+  const linesWithFooter = [
+    ...lines,
+    "",
+    "Copyright © 2023 TeacherPH",
+    "Website: https://reading.llego.dev/",
+  ];
+
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
@@ -235,7 +242,7 @@ const Home: NextPage<{}> = () => {
             rows={4}
             className="w-full mt-5 rounded-lg shadow-sm focus:outline-none focus:shadow-outline"
             placeholder={
-              "For example, The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water, Energy, Planet Mars, or Orange Fruit."
+              "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
             }
           />
           <p className="text-gray-500 text-right mt-2 text-sm">
@@ -290,14 +297,17 @@ const Home: NextPage<{}> = () => {
                     <div
                       className="relative bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer border"
                       onClick={() => {
-                        navigator.clipboard.writeText(`${generatedTopics}`);
+                        const textToCopy = `Author: Mark Anthony Llego\n\n${linesWithFooter.join(
+                          "\n"
+                        )}\n`;
+                        navigator.clipboard.writeText(textToCopy);
                         toast("Generated Passage Copied!", {
                           icon: "✂️",
                         });
                       }}
                     >
                       <p className="text-base leading-normal text-start">
-                        {lines.map((line, index) => (
+                        {linesWithFooter.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
                               <span className="font-bold">{line}</span>
@@ -314,14 +324,6 @@ const Home: NextPage<{}> = () => {
                           </React.Fragment>
                         ))}
                       </p>
-                      {/* <p className="text-base leading-normal text-start">
-                        {lines.map((line, index) => (
-                          <React.Fragment key={index}>
-                            {line}
-                            <br />
-                          </React.Fragment>
-                        ))}
-                      </p> */}
                     </div>
                     <div className="bg-yellow-200 p-3 rounded-lg mt-2 text-sm text-center md:text-left">
                       <h2 className="text-lg font-semibold mb-2">
