@@ -176,13 +176,6 @@ const Home: NextPage<{}> = () => {
   // This line splits a string into an array of strings, with each element representing a line in the original string
   const lines: string[] = generatedTopics.split("\n");
 
-  const linesWithFooter = [
-    ...lines,
-    "",
-    "Copyright © 2023 TeacherPH",
-    "Website: https://reading.llego.dev/",
-  ];
-
   return (
     <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
       <Head>
@@ -297,20 +290,18 @@ const Home: NextPage<{}> = () => {
                     <div
                       className="relative bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer border"
                       onClick={() => {
-                        const textToCopy = `Author: Mark Anthony Llego\n\n${linesWithFooter.join(
-                          "\n"
-                        )}\n`;
-                        navigator.clipboard.writeText(textToCopy);
+                        const passage = `${lines[0]} \nAuthor: Mark Anthony Llego \n\n${generatedTopics}`;
+                        navigator.clipboard.writeText(passage);
                         toast("Generated Passage Copied!", {
                           icon: "✂️",
                         });
                       }}
                     >
                       <p className="text-base leading-normal text-start">
-                        {linesWithFooter.map((line, index) => (
+                        {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <span className="font-bold">{line}</span>
+                              <span className="font-bold text-lg">{line}</span>
                             ) : (
                               <>{line}</>
                             )}
@@ -325,7 +316,7 @@ const Home: NextPage<{}> = () => {
                         ))}
                       </p>
                     </div>
-                    <div className="bg-yellow-200 p-3 rounded-lg mt-2 text-sm text-center md:text-left">
+                    <div className="bg-yellow-200 p-3 rounded-lg mt-2 text-base text-center md:text-left">
                       <h2 className="text-lg font-semibold mb-2">
                         Usage Guidelines:
                       </h2>
@@ -369,7 +360,7 @@ const Home: NextPage<{}> = () => {
                         purposes, and do not modify or adapt the material in any
                         way.
                       </p>
-                      <p className="text-sm">
+                      <p className="mb-4">
                         In addition to these guidelines, users are granted a
                         creative license to use the generated reading passages
                         in their own unique and creative ways. However, users
