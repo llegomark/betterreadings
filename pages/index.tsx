@@ -41,7 +41,7 @@ const Home: NextPage<{}> = () => {
 
   const prompt = topic
     ? gradelevel == "Kindergarten"
-      ? `As a reading specialist or literacy expert, write a simple and engaging reading passage on the theme, subject matter, or content focus about "${topic}" for ${gradelevel} students. The passage should be approximately 50-100 words in length, using simple vocabulary and sentence structures. The story should follow the adventures of a fictional character, such as a friendly animal or a whimsical creature. Suggest a fun and engaging title: The title should be easy to remember and relevant to the story. Consider using a character name, a simple action or event from the story, or a fun word that relates to the story. The title should be easy for Kindergarten students to understand and should encourage them to want to read the passage. In writing the passage, aim to use clear and engaging language that is accessible to Kindergarten students. Consider using colorful and engaging visuals such as illustrations, photographs, or clip art to help reinforce key concepts and to hold the students' attention. Make sure to incorporate basic vocabulary words that are familiar to Kindergarten students, such as "sun," "tree," "water," "flower," etc. At the end of the passage, include 3-5 comprehension questions that are simple and focused on basic concepts, such as identifying objects, recognizing basic shapes, or matching words to pictures. The goal of the passage is to introduce Kindergarten students to the joy of reading and to help them develop basic reading skills. By the end of the passage, students should have a basic understanding of the story and its characters, as well as a foundation for future reading success.`
+      ? `As a reading specialist or literacy expert, write a simple and engaging reading passage on the theme, subject matter, or content focus about "${topic}" for ${gradelevel} students. The passage should be approximately 50-100 words in length, using simple vocabulary and sentence structures. The story should follow the adventures of a fictional character, such as a friendly animal or a whimsical creature. Suggest a fun and engaging title. The title should be easy to remember and relevant to the story. Consider using a character name, a simple action or event from the story, or a fun word that relates to the story. The title should be easy for Kindergarten students to understand and should encourage them to want to read the passage. In writing the passage, aim to use clear and engaging language that is accessible to Kindergarten students. Consider using colorful and engaging visuals such as illustrations, photographs, or clip art to help reinforce key concepts and to hold the students' attention. Make sure to incorporate basic vocabulary words that are familiar to Kindergarten students, such as "sun," "tree," "water," "flower," etc. At the end of the passage, include 3-5 comprehension questions that are simple and focused on basic concepts, such as identifying objects, recognizing basic shapes, or matching words to pictures. The goal of the passage is to introduce Kindergarten students to the joy of reading and to help them develop basic reading skills. By the end of the passage, students should have a basic understanding of the story and its characters, as well as a foundation for future reading success.`
       : gradelevel == "Grade 1"
       ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage on the theme, subject matter, or content focus about "${topic}" for a ${gradelevel} student. The passage should be approximately 100-200 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use illustrations and images, and consider using examples or analogies to make the concepts easier to understand. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 4-5 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, identifying main ideas, and making inferences. Overall, the goal of the passage is to provide students with a comprehensive and accessible introduction to "${topic}" and to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
       : gradelevel == "Grade 2"
@@ -68,7 +68,7 @@ const Home: NextPage<{}> = () => {
       ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage on the theme, subject matter, or content focus about "${topic}" for a ${gradelevel} student. The passage should be approximately 300-600 words in length and covering complex topics and incorporating advanced vocabulary and syntax. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and engaging language with a mix of simple and complex sentence structures. Technical terms should be used when appropriate to challenge students and help them build their vocabulary. To reinforce key concepts, include examples and analogies or context clues, and consider incorporating visuals as well. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 5-10 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, cause-and-effect relationships, identifying main ideas, and making inferences. Overall, the goal of the passage is to provide students with a comprehensive and engaging overview of "${topic}" and to help them develop their critical thinking and analysis skills and preparing students for college-level reading and writing.`
       : "Invalid Category"
     : gradelevel == "Kindergarten"
-    ? `As a reading specialist or literacy expert, write a simple and engaging reading passage for Kindergarten students. The passage should be approximately 50-100 words in length, using simple vocabulary and sentence structures. The story should follow the adventures of a fictional character, such as a friendly animal or a whimsical creature. Suggest a fun and engaging title: The title should be easy to remember and relevant to the story. Consider using a character name, a simple action or event from the story, or a fun word that relates to the story. The title should be easy for Kindergarten students to understand and should encourage them to want to read the passage. In writing the passage, aim to use clear and engaging language that is accessible to Kindergarten students. Consider using colorful and engaging visuals such as illustrations, photographs, or clip art to help reinforce key concepts and to hold the students' attention. Make sure to incorporate basic vocabulary words that are familiar to Kindergarten students, such as "sun," "tree," "water," "flower," etc. At the end of the passage, include 3-5 comprehension questions that are simple and focused on basic concepts, such as identifying objects, recognizing basic shapes, or matching words to pictures. The goal of the passage is to introduce Kindergarten students to the joy of reading and to help them develop basic reading skills. By the end of the passage, students should have a basic understanding of the story and its characters, as well as a foundation for future reading success.`
+    ? `As a reading specialist or literacy expert, write a simple and engaging reading passage for Kindergarten students. The passage should be approximately 50-100 words in length, using simple vocabulary and sentence structures. The story should follow the adventures of a fictional character, such as a friendly animal or a whimsical creature. Suggest a fun and engaging title. The title should be easy to remember and relevant to the story. Consider using a character name, a simple action or event from the story, or a fun word that relates to the story. The title should be easy for Kindergarten students to understand and should encourage them to want to read the passage. In writing the passage, aim to use clear and engaging language that is accessible to Kindergarten students. Consider using colorful and engaging visuals such as illustrations, photographs, or clip art to help reinforce key concepts and to hold the students' attention. Make sure to incorporate basic vocabulary words that are familiar to Kindergarten students, such as "sun," "tree," "water," "flower," etc. At the end of the passage, include 3-5 comprehension questions that are simple and focused on basic concepts, such as identifying objects, recognizing basic shapes, or matching words to pictures. The goal of the passage is to introduce Kindergarten students to the joy of reading and to help them develop basic reading skills. By the end of the passage, students should have a basic understanding of the story and its characters, as well as a foundation for future reading success.`
     : gradelevel == "Grade 1"
     ? `As a reading specialist or literacy expert, write a comprehensive and engaging reading passage for a ${gradelevel} student. Choose a topic for the reading passage that is relevant and appropriate for students in ${gradelevel}. The passage should be approximately 100-200 words in length and include various appropriate vocabulary words for this grade level. Suggest a catchy title at the beginning; the title should be informative, attention-grabbing, and relevant to the topic. Consider using a question, a statistic, a quote, or a pun to make the title memorable and catchy. In writing the passage, use clear and simple language with short sentences and avoid using complex sentence structures or technical terms. To help students understand the material, use illustrations and images, and consider using examples or analogies to make the concepts easier to understand. Be sure to highlight important vocabulary words and provide definitions or explanations for these terms. At the end of the passage, include 4-5 comprehension questions to test students' understanding and ability to analyze the material. The questions should include a mix of multiple-choice and interactive elements, such as fill-in-the-blank exercises or matching exercises. The questions should cover various topics, including vocabulary, sequencing, identifying main ideas, and making inferences. Overall, the goal of the passage is to help them build their critical thinking and analysis skills as they move towards more advanced coursework in the future.`
     : gradelevel == "Grade 2"
@@ -301,22 +301,27 @@ const Home: NextPage<{}> = () => {
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <span className="font-bold text-lg">{line}</span>
+                              <div className="text-center">
+                                <span className="font-bold text-lg">
+                                  {line}
+                                </span>
+                              </div>
                             ) : (
                               <>{line}</>
                             )}
                             <br />
                             {index === 0 && (
-                              <>
-                                Author: Mark Anthony Llego
+                              <div className="text-center">
+                                <span className="font-bold">Author: </span>Mark
+                                Anthony Llego
                                 <br />
-                              </>
+                              </div>
                             )}
                           </React.Fragment>
                         ))}
                       </p>
                     </div>
-                    <div className="bg-yellow-200 p-3 rounded-lg mt-2 text-base text-center md:text-left">
+                    <div className="bg-yellow-200 p-4 rounded-lg mt-2 text-base text-center md:text-left">
                       <h2 className="text-lg font-semibold mb-2">
                         Usage Guidelines:
                       </h2>
@@ -351,16 +356,24 @@ const Home: NextPage<{}> = () => {
                         relevant ethical considerations.
                       </p>
                       <p className="mb-4">
-                        The reading passages are licensed under a Creative
-                        Commons Attribution-NonCommercial-NoDerivatives 4.0
-                        International License. This means that users are free to
-                        share, copy, and redistribute the material in any medium
-                        or format, as long as they give appropriate credit to
-                        the creators, do not use the material for commercial
-                        purposes, and do not modify or adapt the material in any
-                        way.
+                        The reading passages are licensed under a{" "}
+                        <a
+                          href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 font-bold"
+                        >
+                          Creative Commons
+                          Attribution-NonCommercial-NoDerivatives 4.0
+                          International License
+                        </a>
+                        . This means that users are free to share, copy, and
+                        redistribute the material in any medium or format, as
+                        long as they give appropriate credit to the creators, do
+                        not use the material for commercial purposes, and do not
+                        modify or adapt the material in any way.
                       </p>
-                      <p className="mb-4">
+                      <p>
                         In addition to these guidelines, users are granted a
                         creative license to use the generated reading passages
                         in their own unique and creative ways. However, users
