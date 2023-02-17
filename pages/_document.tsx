@@ -1,10 +1,10 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 const SITE_NAME =
-  "Personalized Reading Passages for Improved Student Learning - Better Reading";
+  "Personalized Reading Passages for Improved Student Learning - Better Readings";
 const DESCRIPTION =
-  "Revolutionize your students' reading experience with BetterReading. Our AI-generated reading passages are tailored to each student's grade level and designed to improve skills, comprehension, and confidence. Start today!";
-const IMAGE_URL = "https://reading.llego.dev/betterreading.png";
+  "Revolutionize your students' reading experience with BetterReading. Our custom reading passages are tailored to each student's grade level and designed to improve skills, comprehension, and confidence. Start today!";
+const IMAGE_URL = "https://reading.llego.dev/betterreadings.png";
 
 class MyDocument extends Document {
   render() {
