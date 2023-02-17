@@ -8,7 +8,6 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
 import ResizablePanel from "../components/ResizablePanel";
-import { useRouter } from "next/router";
 import Balancer from "react-wrap-balancer";
 import React from "react";
 import SocialIcon from "../components/SocialIcon";
@@ -37,8 +36,6 @@ const Home: NextPage<{}> = () => {
   const [topic, setTopic] = useState<string>("");
   const [gradelevel, setGradelevel] = useState<GradelevelType>("Kindergarten");
   const [generatedTopics, setGeneratedTopics] = useState<string>("");
-
-  const router = useRouter();
 
   useEffect(() => {}, []); // This useEffect hook runs once when the component mounts
 
