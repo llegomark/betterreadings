@@ -206,12 +206,14 @@ const Home: NextPage<{}> = () => {
           </Balancer>
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
-          Our AI-generated reading passages are tailored to each student's grade
-          level and designed to improve their reading skills, comprehension, and
-          confidence. Say goodbye to generic reading materials and hello to
-          personalized, engaging content that will inspire your students to read
-          and learn. Get started today and give your students the tools they
-          need to succeed.
+          <Balancer>
+            Our AI-generated reading passages are tailored to each student's
+            grade level and designed to improve their reading skills,
+            comprehension, and confidence. Say goodbye to generic reading
+            materials and hello to personalized, engaging content that will
+            inspire your students to read and learn. Get started today and give
+            your students the tools they need to succeed.
+          </Balancer>
         </p>
         <div className="max-w-xl w-full px-6">
           <div className="flex mt-10 items-center align-items-center">
