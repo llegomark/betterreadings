@@ -11,6 +11,8 @@ import ResizablePanel from "../components/ResizablePanel";
 import Balancer from "react-wrap-balancer";
 import React from "react";
 import SocialIcon from "../components/SocialIcon";
+import { Tooltip } from "react-tooltip";
+import "react-tooltip/dist/react-tooltip.css";
 
 // This defines the types of data that the API response should have
 interface ResponseType {
@@ -297,7 +299,11 @@ const Home: NextPage<{}> = () => {
                         });
                       }}
                     >
-                      <p className="text-base leading-normal text-start">
+                      <p
+                        data-tooltip-id="copy-tooltip"
+                        data-tooltip-content="Click to Copy"
+                        className="text-base leading-normal text-start"
+                      >
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
@@ -319,6 +325,7 @@ const Home: NextPage<{}> = () => {
                             )}
                           </React.Fragment>
                         ))}
+                        <Tooltip id="copy-tooltip" />
                       </p>
                     </div>
                     <div className="bg-yellow-200 p-4 rounded-lg mt-2 text-base text-center md:text-left">

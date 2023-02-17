@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.1",
     "react-hot-toast": "^2.4.0",
+    "react-tooltip": "^5.8.1",
     "react-use-measure": "^2.1.1",
     "react-wrap-balancer": "^0.4.0"
   },
