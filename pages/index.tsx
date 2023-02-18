@@ -180,7 +180,7 @@ const Home: NextPage = () => {
   const lines: string[] = generatedTopics.split("\n");
 
   return (
-    <div className="flex max-w-5xl mx-auto flex-col items-center justify-center py-2 min-h-screen">
+    <div className="mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center py-2">
       <Head>
         <title>
           Personalized Reading Passages for Improved Student Learning - Better
@@ -189,9 +189,9 @@ const Home: NextPage = () => {
       </Head>
 
       <Header href="/" />
-      <main className="mt-12 sm:mt-15 flex flex-1 flex-col items-center justify-center px-4 text-center">
+      <main className="sm:mt-15 mt-12 flex flex-1 flex-col items-center justify-center px-4 text-center">
         <a
-          className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100 mb-10"
+          className="mb-10 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100"
           href="https://github.com/llegomark/betterreading"
           target="_blank"
           rel="noopener noreferrer"
@@ -207,17 +207,17 @@ const Home: NextPage = () => {
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
           <Balancer>
-            Our reading passages are tailored to each student&apos;s grade level and
-            designed to improve their reading skills, comprehension, and
+            Our reading passages are tailored to each student&apos;s grade level
+            and designed to improve their reading skills, comprehension, and
             confidence. Say goodbye to generic reading materials and hello to
             personalized, engaging content that will inspire your students to
             read and learn. Get started today and give your students the tools
             they need to succeed.
           </Balancer>
         </p>
-        <div className="max-w-xl w-full px-6">
-          <div className="flex mt-10 items-center align-items-center">
-            <span className="text-white bg-black rounded-full text-center flex items-center justify-center leading-zero p-2 w-6 h-6">
+        <div className="w-full max-w-xl px-6">
+          <div className="align-items-center mt-10 flex items-center">
+            <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
               1
             </span>
             <p className="ml-3 text-left text-base">
@@ -238,23 +238,23 @@ const Home: NextPage = () => {
               }
             }}
             rows={4}
-            className="w-full mt-5 rounded-lg shadow-sm focus:outline-none focus:shadow-outline"
+            className="focus:shadow-outline mt-5 w-full rounded-lg shadow-sm focus:outline-none"
             placeholder={
               "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
             }
           />
-          <p className="text-gray-500 text-right mt-2 text-sm">
+          <p className="mt-2 text-right text-sm text-gray-500">
             {topic.length}/100
           </p>
-          <div className="flex mt-10 items-center align-items-center">
-            <span className="text-white bg-black rounded-full text-center flex items-center justify-center leading-zero p-2 w-6 h-6">
+          <div className="align-items-center mt-10 flex items-center">
+            <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
               2
             </span>
             <p className="ml-3 text-left text-base">
               <Balancer>Select a grade level.</Balancer>
             </p>
           </div>
-          <div className="block mt-3">
+          <div className="mt-3 block">
             <DropDown
               gradelevel={gradelevel}
               setGradelevel={(newGradelevel) => setGradelevel(newGradelevel)}
@@ -262,7 +262,7 @@ const Home: NextPage = () => {
           </div>
           {!loading && (
             <button
-              className="w-full mt-10 px-4 py-2 text-base font-bold text-white bg-black rounded-lg hover:bg-black/80 transition-colors"
+              className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base font-bold text-white transition-colors hover:bg-black/80"
               onClick={(e) => generateTopic(e)}
             >
               Generate Passage &rarr;
@@ -270,7 +270,7 @@ const Home: NextPage = () => {
           )}
           {loading && (
             <button
-              className="w-full mt-10 px-4 py-2 text-base text-white bg-black rounded-lg"
+              className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base text-white"
               disabled
             >
               <LoadingDots color="white" style="large" />
@@ -282,23 +282,24 @@ const Home: NextPage = () => {
           reverseOrder={false}
           toastOptions={{ duration: 2000 }}
         />
-        <hr className="h-px bg-gray-700 border-1 dark:bg-gray-700" />
+        <hr className="border-1 h-px bg-gray-700 dark:bg-gray-700" />
         <ResizablePanel>
           <AnimatePresence mode="wait">
-            <motion.div className="space-y-10 my-10">
+            <motion.div className="my-10 space-y-10">
               {generatedTopics && (
                 <>
                   <div>
-                    <h2 className="max-w-4xl mx-auto px-3 text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
+                    <h2 className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
                       <Balancer>Generated Passage</Balancer>
                     </h2>
                   </div>
-                  <div className="max-w-xl mx-auto px-3 space-y-8 flex flex-col items-center justify-center">
+                  <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 px-3">
                     <div
-                      className="relative bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer border"
+                      className="relative transform cursor-pointer rounded-xl border bg-sky-200 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-100 hover:shadow-lg"
                       onClick={() => {
-                        const passage = `${lines[0] ?? ""} \nAuthor: Mark Anthony Llego \n\n${generatedTopics}`;
-                        navigator.clipboard.writeText(passage)
+                        const passage = `\nAuthor: Mark Anthony Llego \n\n${generatedTopics}`;
+                        navigator.clipboard
+                          .writeText(passage)
                           .then(() => {
                             toast("Generated Passage Copied!", {
                               icon: "✂️",
@@ -309,32 +310,21 @@ const Home: NextPage = () => {
                           });
                       }}
                     >
-                      <p className="text-base leading-normal text-start">
+                      <p className="text-start text-base leading-normal">
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <div className="text-center">
-                                <span className="font-bold text-lg">
-                                  {line}
-                                </span>
-                              </div>
+                              <span className="font-bold">{line}</span>
                             ) : (
-                              <>{line}</>
+                              line
                             )}
                             <br />
-                            {index === 0 && (
-                              <div className="text-center">
-                                <span className="font-bold">Author: </span>Mark
-                                Anthony Llego
-                                <br />
-                              </div>
-                            )}
                           </React.Fragment>
                         ))}
                       </p>
                     </div>
-                    <div className="bg-yellow-200 p-4 rounded-lg mt-2 text-base text-center md:text-left">
-                      <h2 className="text-lg font-semibold mb-2">
+                    <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-center text-base md:text-left">
+                      <h2 className="mb-2 text-lg font-semibold">
                         Usage Guidelines:
                       </h2>
                       <p className="mb-4">
@@ -373,7 +363,7 @@ const Home: NextPage = () => {
                           href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 font-bold"
+                          className="font-bold text-blue-600 hover:text-blue-800"
                         >
                           Creative Commons
                           Attribution-NonCommercial-NoDerivatives 4.0

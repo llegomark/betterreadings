@@ -50,19 +50,19 @@ export const DropDown: React.FC<DropDownProps> = ({
   return (
     <Menu
       as="div"
-      className="relative block text-left w-full"
+      className="relative block w-full text-left"
       key={`dropdown-${gradelevel}-${Math.random()}`}
     >
       <div>
         {/* The Menu.Button element renders the main button of the dropdown, which displays the currently selected grade level. */}
-        <Menu.Button className="inline-flex w-full justify-between items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
+        <Menu.Button className="inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
           {gradelevel}
           <ChevronUpIcon
             className="-mr-1 ml-2 h-5 w-5 ui-open:hidden"
             aria-hidden="true"
           />
           <ChevronDownIcon
-            className="-mr-1 ml-2 h-5 w-5 hidden ui-open:block"
+            className="-mr-1 ml-2 hidden h-5 w-5 ui-open:block"
             aria-hidden="true"
           />
         </Menu.Button>
@@ -79,7 +79,7 @@ export const DropDown: React.FC<DropDownProps> = ({
       >
         {/* The Menu.Items element renders the list of selectable grade levels, which appears when the dropdown button is clicked. */}
         <Menu.Items className="absolute left-0 z-10 mt-2 w-full origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div className="overflow-y-scroll h-32">
+          <div className="h-32 overflow-y-scroll">
             {gradelevels.map((gradelevelItem) => (
               // The Menu.Item element represents a selectable item in the list of grade levels.
               <Menu.Item key={gradelevelItem}>
@@ -87,14 +87,14 @@ export const DropDown: React.FC<DropDownProps> = ({
                   // The button inside the Menu.Item element displays the grade level and allows the user to select it.
                   <button
                     onClick={() => setGradelevel(gradelevelItem)}
-                    className={`px-4 py-2 text-sm w-full text-left flex items-center space-x-2 justify-between ${
+                    className={`flex w-full items-center justify-between space-x-2 px-4 py-2 text-left text-sm ${
                       active ? "bg-gray-100 text-gray-900" : "text-gray-700"
                     } ${gradelevel === gradelevelItem ? "bg-gray-200" : ""}`}
                   >
                     <span>{gradelevelItem}</span>
                     {/* The CheckIcon component displays a checkmark next to the currently selected grade level. */}
                     {gradelevel === gradelevelItem ? (
-                      <CheckIcon className="w-4 h-4 text-bold" />
+                      <CheckIcon className="text-bold h-4 w-4" />
                     ) : null}
                   </button>
                 )}

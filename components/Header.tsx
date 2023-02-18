@@ -16,7 +16,7 @@ export default function Header({ href }: HeaderProps) {
           height={36}
           aria-label="Better Readings Logo"
         />
-        <h1 className="ml-2 text-3xl font-bold text-slate-900 tracking-tight sm:text-5xl">
+        <h1 className="ml-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-5xl">
           Better Readings
         </h1>
       </a>
