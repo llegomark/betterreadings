@@ -1,4 +1,5 @@
-import { motion, Transition } from "framer-motion";
+import type { Transition } from "framer-motion";
+import { motion } from "framer-motion";
 import useMeasure from "react-use-measure";
 
 interface ResizablePanelProps {

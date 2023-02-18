@@ -1,9 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
-import { DropDown, GradelevelType } from "../components/DropDown";
+import type { GradelevelType } from "../components/DropDown";
+import { DropDown } from "../components/DropDown";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
@@ -29,15 +32,13 @@ interface ApiResponse extends ResponseType {
 }
 
 // This defines the Home component, which is a functional component with no props
-const Home: NextPage<{}> = () => {
+const Home: NextPage = () => {
   // These states store the component's data and whether it is currently loading
   const [response, setResponse] = useState<ResponseType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [topic, setTopic] = useState<string>("");
   const [gradelevel, setGradelevel] = useState<GradelevelType>("Kindergarten");
   const [generatedTopics, setGeneratedTopics] = useState<string>("");
-
-  useEffect(() => {}, []); // This useEffect hook runs once when the component mounts
 
   const prompt = topic
     ? gradelevel == "Kindergarten"
@@ -96,7 +97,9 @@ const Home: NextPage<{}> = () => {
     : "Invalid Category";
 
   // Define an asynchronous function that sends a POST request to an API route and displays the response
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const generateTopic = async (e: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     e.preventDefault(); // Stop default form submission behavior
     setGeneratedTopics(""); // Clear any previous generated topics
     setLoading(true); // Set the loading state to true
@@ -204,7 +207,7 @@ const Home: NextPage<{}> = () => {
         </h2>
         <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
           <Balancer>
-            Our reading passages are tailored to each student's grade level and
+            Our reading passages are tailored to each student&apos;s grade level and
             designed to improve their reading skills, comprehension, and
             confidence. Say goodbye to generic reading materials and hello to
             personalized, engaging content that will inspire your students to
@@ -218,8 +221,10 @@ const Home: NextPage<{}> = () => {
               1
             </span>
             <p className="ml-3 text-left text-base">
-              Enter a theme, subject matter, or content focus. (Leave blank to
-              generate a random passage.)
+              <Balancer>
+                Enter a theme, subject matter, or content focus. (Leave blank to
+                generate a random passage.)
+              </Balancer>
             </p>
           </div>
           <textarea
@@ -229,7 +234,7 @@ const Home: NextPage<{}> = () => {
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
-                generateTopic(e);
+                void generateTopic(e);
               }
             }}
             rows={4}
@@ -245,7 +250,9 @@ const Home: NextPage<{}> = () => {
             <span className="text-white bg-black rounded-full text-center flex items-center justify-center leading-zero p-2 w-6 h-6">
               2
             </span>
-            <p className="ml-3 text-left text-base">Select a grade level.</p>
+            <p className="ml-3 text-left text-base">
+              <Balancer>Select a grade level.</Balancer>
+            </p>
           </div>
           <div className="block mt-3">
             <DropDown
@@ -283,18 +290,23 @@ const Home: NextPage<{}> = () => {
                 <>
                   <div>
                     <h2 className="max-w-4xl mx-auto px-3 text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-                      Generated Passage
+                      <Balancer>Generated Passage</Balancer>
                     </h2>
                   </div>
                   <div className="max-w-xl mx-auto px-3 space-y-8 flex flex-col items-center justify-center">
                     <div
                       className="relative bg-sky-200 rounded-xl shadow-md p-4 hover:bg-sky-100 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer border"
                       onClick={() => {
-                        const passage = `${lines[0]} \nAuthor: Mark Anthony Llego \n\n${generatedTopics}`;
-                        navigator.clipboard.writeText(passage);
-                        toast("Generated Passage Copied!", {
-                          icon: "✂️",
-                        });
+                        const passage = `${lines[0] ?? ""} \nAuthor: Mark Anthony Llego \n\n${generatedTopics}`;
+                        navigator.clipboard.writeText(passage)
+                          .then(() => {
+                            toast("Generated Passage Copied!", {
+                              icon: "✂️",
+                            });
+                          })
+                          .catch((error) => {
+                            console.error(error);
+                          });
                       }}
                     >
                       <p className="text-base leading-normal text-start">

@@ -10,6 +10,7 @@ function Copyright() {
     <a
       href="https://llego.dev/"
       target="_blank"
+      rel="noreferrer"
       className="font-bold underline-offset-2 transition hover:underline"
       aria-label="Visit Mark Anthony Llego's website"
     >
