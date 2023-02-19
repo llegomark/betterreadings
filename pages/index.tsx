@@ -209,7 +209,7 @@ const Home: NextPage = () => {
             Take Your Students&apos; Reading Skills to the Next Level
           </Balancer>
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-6 text-slate-900 sm:mt-12 sm:text-lg lg:text-lg">
+        <p className="mx-auto mt-6 max-w-xl text-base leading-normal text-slate-900 sm:mt-12 sm:text-lg lg:text-lg">
           <Balancer>
             Our reading passages are tailored to each student&apos;s grade level
             and designed to improve their reading skills, comprehension, and
@@ -224,7 +224,7 @@ const Home: NextPage = () => {
             <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
               1
             </span>
-            <p className="ml-3 text-left text-base">
+            <p className="ml-3 text-left text-base leading-normal text-slate-900 sm:text-lg lg:text-lg">
               <Balancer>
                 Enter a theme, subject matter, or content focus. (Leave blank to
                 generate a random passage.)
@@ -249,7 +249,7 @@ const Home: NextPage = () => {
               <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
                 2
               </span>
-              <p className="ml-3 text-left text-base">
+              <p className="ml-3 text-left text-base leading-normal text-slate-900 sm:text-lg lg:text-lg">
                 <Balancer>Select a grade level.</Balancer>
               </p>
             </div>
@@ -310,31 +310,34 @@ const Home: NextPage = () => {
                           });
                       }}
                     >
-                      <p className="text-start text-base leading-normal">
-                        <span className="text-lg font-bold">Author: </span>
+                      <p className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg">
+                        <span className="font-bold">Author: </span>
                         <a
                           href="https://www.facebook.com/markllego/"
                           target="_blank"
                           rel="noreferrer"
-                          className="text-lg font-normal underline"
+                          className="underline"
                         >
                           Mark Anthony Llego
                         </a>
                         <br />
-                        <span className="text-lg font-bold">Email: </span>
+                        <span className="font-bold">Email: </span>
                         <a
                           href="mailto:markllego@gmail.com"
                           target="_blank"
                           rel="noreferrer"
-                          className="text-lg font-normal underline"
+                          className="underline"
                         >
                           markllego@gmail.com
                         </a>
                         <br />
+                        <span className="font-bold">Level: </span>
+                        <span>{gradelevel}</span>
+                        <br />
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <span className="text-lg font-bold">{line}</span>
+                              <span className="font-bold">{line}</span>
                             ) : (
                               line
                             )}
@@ -342,16 +345,14 @@ const Home: NextPage = () => {
                           </React.Fragment>
                         ))}
                         <br />
-                        <span className="text-sm font-bold">Hint: </span>
-                        <span className="text-sm">
+                        <span className="font-bold">Hint: </span>
+                        <span>
                           Ready to copy the generated passage? Simply click it!
                         </span>
                       </p>
                     </div>
-                    <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-start text-base">
-                      <h2 className="mb-2 text-lg font-bold">
-                        Usage Guidelines:
-                      </h2>
+                    <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-start text-base text-slate-900 sm:text-lg lg:text-lg">
+                      <h2 className="mb-2 font-bold">Usage Guidelines:</h2>
                       <p className="mb-4">
                         The generated reading passages are intended for
                         educational use only. They are not to be used for
