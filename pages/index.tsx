@@ -311,20 +311,45 @@ const Home: NextPage = () => {
                       }}
                     >
                       <p className="text-start text-base leading-normal">
+                        <span className="text-lg font-bold">Author: </span>
+                        <a
+                          href="https://www.facebook.com/markllego/"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-lg font-normal underline"
+                        >
+                          Mark Anthony Llego
+                        </a>
+                        <br />
+                        <span className="text-lg font-bold">Email: </span>
+                        <a
+                          href="mailto:markllego@gmail.com"
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-lg font-normal underline"
+                        >
+                          markllego@gmail.com
+                        </a>
+                        <br />
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <span className="font-bold">{line}</span>
+                              <span className="text-lg font-bold">{line}</span>
                             ) : (
                               line
                             )}
                             <br />
                           </React.Fragment>
                         ))}
+                        <br />
+                        <span className="text-base font-bold">Hint: </span>
+                        <span className="text-base">
+                          Ready to copy the generated passage? Simply click it!
+                        </span>
                       </p>
                     </div>
                     <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-center text-base md:text-left">
-                      <h2 className="mb-2 text-lg font-semibold">
+                      <h2 className="mb-2 text-lg font-bold">
                         Usage Guidelines:
                       </h2>
                       <p className="mb-4">
