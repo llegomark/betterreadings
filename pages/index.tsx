@@ -34,7 +34,7 @@ interface ApiResponse extends ResponseType {
 // This defines the Home component, which is a functional component with no props
 const Home: NextPage = () => {
   // These states store the component's data and whether it is currently loading
-  const [response, setResponse] = useState<ResponseType | null>(null);
+  const [, setResponse] = useState<ResponseType | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [topic, setTopic] = useState<string>("");
   const [gradelevel, setGradelevel] = useState<GradelevelType>("Kindergarten");
