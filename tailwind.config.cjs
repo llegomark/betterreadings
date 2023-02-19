@@ -1,15 +1,25 @@
-/** @type {import('tailwindcss').Config} */
+/**
+ * This is a configuration object for the Tailwind CSS framework, which allows you
+ * to specify various settings for the styles used in your application.
+ */
 module.exports = {
+  // The 'future' property enables or disables experimental features in Tailwind.
   future: {
     hoverOnlyWhenSupported: true,
   },
+
+  // The 'content' property specifies where to look for files to process.
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
+
+  // The 'theme' property lets you define custom values for colors, fonts, etc.
   theme: {
+    // The 'extend' property allows you to add new styles or modify existing ones.
     extend: {
+      // The 'animation' property defines custom animations.
       animation: {
         scale: "scale 0.5s ease-in-out infinite alternate",
         rotate: "rotate 2s linear infinite",
@@ -18,6 +28,7 @@ module.exports = {
         spinner: "spinner 1s linear infinite",
         blink: "blink 1.4s linear infinite",
       },
+      // The 'keyframes' property defines custom keyframes for animations.
       keyframes: {
         scale: {
           "0%": { transform: "scale(1)" },
@@ -46,5 +57,7 @@ module.exports = {
       },
     },
   },
+
+  // The 'plugins' property specifies which plugins to load for Tailwind.
   plugins: [require("@tailwindcss/forms"), require("@headlessui/tailwindcss")],
 };

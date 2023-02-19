@@ -1,8 +1,10 @@
+// Declare the type for the props that the component will receive, which includes the className for the SVG element
 interface SquigglyLinesProps extends React.SVGProps<SVGSVGElement> {
   className: string;
 }
-
+// Define the SquigglyLines component as a functional component that takes in a className prop
 const SquigglyLines: React.FC<SquigglyLinesProps> = ({ className }) => {
+  // Return an SVG element with a squiggly line, which includes the provided className prop
   return (
     <svg
       aria-hidden="true"
@@ -15,5 +17,5 @@ const SquigglyLines: React.FC<SquigglyLinesProps> = ({ className }) => {
     </svg>
   );
 };
-
+// Export the SquigglyLines component as the default export of the module
 export default SquigglyLines;

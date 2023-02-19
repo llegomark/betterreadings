@@ -342,13 +342,13 @@ const Home: NextPage = () => {
                           </React.Fragment>
                         ))}
                         <br />
-                        <span className="text-base font-bold">Hint: </span>
-                        <span className="text-base">
+                        <span className="text-sm font-bold">Hint: </span>
+                        <span className="text-sm">
                           Ready to copy the generated passage? Simply click it!
                         </span>
                       </p>
                     </div>
-                    <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-center text-base md:text-left">
+                    <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-start text-base">
                       <h2 className="mb-2 text-lg font-bold">
                         Usage Guidelines:
                       </h2>

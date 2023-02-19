@@ -1,23 +1,40 @@
 {
   "compilerOptions": {
+    // Set the language target to ECMAScript 2017 (ES8).
     "target": "es2017",
+    // Include typings for the DOM and iterable objects in the output.
     "lib": ["dom", "dom.iterable", "esnext"],
+    // Allow both TypeScript and JavaScript files to be compiled.
     "allowJs": true,
+    // Check both TypeScript and JavaScript files for syntax errors.
     "checkJs": true,
+    // Skip checking typings from the included libraries.
     "skipLibCheck": true,
+    // Enable strict type checking options.
     "strict": true,
+    // Ensure consistent file name casing across platforms.
     "forceConsistentCasingInFileNames": true,
+    // Do not emit compiled output files.
     "noEmit": true,
+    // Enable interoperability between CommonJS and ES6-style modules.
     "esModuleInterop": true,
+    // Specify the module format for the output.
     "module": "esnext",
+    // Specify the module resolution strategy.
     "moduleResolution": "node",
+    // Enable the import of JSON files as modules.
     "resolveJsonModule": true,
+    // Ensure that each file is compiled in its own scope.
     "isolatedModules": true,
+    // Preserve JSX syntax in output.
     "jsx": "preserve",
+    // Enable incremental compilation, which can speed up subsequent builds.
     "incremental": true,
+    // Turn on strict checking for indexed access, so that missing properties will be caught.
     "noUncheckedIndexedAccess": true
   },
+  // Specify the files to include in the compilation process.
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
+  // Specify the files to exclude from the compilation process.
   "exclude": ["node_modules"]
 }
-
