@@ -15,8 +15,10 @@ interface RatelimitInfo {
 // Create a new ratelimit instance with Upstash Redis and sliding window strategy
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(5, "60 s"),
-  ephemeralCache: new Map(),
+  limiter: Ratelimit.slidingWindow(6, "24 h"),
+  timeout: 2000, // 2 second
+  analytics: true,
+  // ephemeralCache: new Map(),
 });
 
 /**

@@ -37,6 +37,7 @@ const Home: NextPage = () => {
   const [topic, setTopic] = useState<string>("");
   const [gradelevel, setGradelevel] = useState<GradelevelType>("Kindergarten");
   const [generatedTopics, setGeneratedTopics] = useState<string>("");
+  const [ratelimitRemaining, setRatelimitRemaining] = useState<string>("");
 
   const prompt = topic
     ? gradelevel == "Kindergarten"
@@ -142,9 +143,14 @@ const Home: NextPage = () => {
       // Set the response state to the error and show an alert to the user
       setResponse(error);
       setLoading(false);
-      alert(`Rate limit reached, try again after one minute.`);
+      alert(
+        `You have no API requests remaining today. Try again after 24 hours.`
+      );
       return;
     }
+
+    // Set the ratelimitRemaining state to the value of the X-Ratelimit-Remaining header
+    setRatelimitRemaining(response.headers.get("X-Ratelimit-Remaining") || "");
 
     // Read the response body as a stream and update the generated topics state with each chunk of data
     const data = response.body;
@@ -311,6 +317,12 @@ const Home: NextPage = () => {
                       }}
                     >
                       <p className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg">
+                        <span className="font-bold">Limit: </span>
+                        <span>
+                          You have {ratelimitRemaining} requests remaining
+                          today.
+                        </span>
+                        <br />
                         <span className="font-bold">Author: </span>
                         <a
                           href="https://www.facebook.com/markllego/"
