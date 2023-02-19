@@ -196,20 +196,20 @@ const Home: NextPage = () => {
       <main className="sm:mt-15 mt-12 flex flex-1 flex-col items-center justify-center px-4 text-center">
         <a
           className="mb-10 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100"
-          href="https://github.com/llegomark/betterreading"
+          href="/github"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Visit Mark Anthony Llego's Github profile"
         >
           <SocialIcon platform="github" size={25} />
-          <p>Source Code on Github</p>
+          <p>Star on Github</p>
         </a>
         <h2 className="mx-auto max-w-4xl text-5xl font-bold tracking-normal text-slate-900 sm:text-6xl md:text-7xl">
           <Balancer>
             Take Your Students&apos; Reading Skills to the Next Level
           </Balancer>
         </h2>
-        <p className="mx-auto mt-12 max-w-xl text-lg leading-7 text-slate-900 sm:text-base lg:text-lg">
+        <p className="mx-auto mt-6 max-w-xl text-base leading-6 text-slate-900 sm:mt-12 sm:text-lg lg:text-lg">
           <Balancer>
             Our reading passages are tailored to each student&apos;s grade level
             and designed to improve their reading skills, comprehension, and
