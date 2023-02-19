@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -97,10 +95,16 @@ const Home: NextPage = () => {
     : "Invalid Category";
 
   // Define an asynchronous function that sends a POST request to an API route and displays the response
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const generateTopic = async (e: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    e.preventDefault(); // Stop default form submission behavior
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    generateTopic().catch((error) => {
+      // Handle errors here
+      console.error(error);
+      alert("An error occurred. Please try again.");
+    });
+  };
+
+  const generateTopic = async (): Promise<void> => {
     setGeneratedTopics(""); // Clear any previous generated topics
     setLoading(true); // Set the loading state to true
 
@@ -227,55 +231,51 @@ const Home: NextPage = () => {
               </Balancer>
             </p>
           </div>
-          <textarea
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-            onInput={limitCharacters}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                void generateTopic(e);
+          <form onSubmit={handleSubmit}>
+            <textarea
+              value={topic}
+              onChange={(e) => setTopic(e.target.value)}
+              onInput={limitCharacters}
+              rows={4}
+              className="focus:shadow-outline mt-5 w-full rounded-lg shadow-sm focus:outline-none"
+              placeholder={
+                "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
               }
-            }}
-            rows={4}
-            className="focus:shadow-outline mt-5 w-full rounded-lg shadow-sm focus:outline-none"
-            placeholder={
-              "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
-            }
-          />
-          <p className="mt-2 text-right text-sm text-gray-500">
-            {topic.length}/100
-          </p>
-          <div className="align-items-center mt-10 flex items-center">
-            <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
-              2
-            </span>
-            <p className="ml-3 text-left text-base">
-              <Balancer>Select a grade level.</Balancer>
-            </p>
-          </div>
-          <div className="mt-3 block">
-            <DropDown
-              gradelevel={gradelevel}
-              setGradelevel={(newGradelevel) => setGradelevel(newGradelevel)}
             />
-          </div>
-          {!loading && (
-            <button
-              className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base font-bold text-white transition-colors hover:bg-black/80"
-              onClick={(e) => generateTopic(e)}
-            >
-              Generate Passage &rarr;
-            </button>
-          )}
-          {loading && (
-            <button
-              className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base text-white"
-              disabled
-            >
-              <LoadingDots color="white" style="large" />
-            </button>
-          )}
+            <p className="mt-2 text-right text-sm text-gray-500">
+              {topic.length}/100
+            </p>
+            <div className="align-items-center mt-10 flex items-center">
+              <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
+                2
+              </span>
+              <p className="ml-3 text-left text-base">
+                <Balancer>Select a grade level.</Balancer>
+              </p>
+            </div>
+            <div className="mt-3 block">
+              <DropDown
+                gradelevel={gradelevel}
+                setGradelevel={(newGradelevel) => setGradelevel(newGradelevel)}
+              />
+            </div>
+            {!loading && (
+              <button
+                className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base font-bold text-white transition-colors hover:bg-black/80"
+                type="submit"
+              >
+                Generate Passage &rarr;
+              </button>
+            )}
+            {loading && (
+              <button
+                className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base text-white"
+                disabled
+              >
+                <LoadingDots color="white" style="large" />
+              </button>
+            )}
+          </form>
         </div>
         <Toaster
           position="top-center"
