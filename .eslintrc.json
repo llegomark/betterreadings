@@ -1,29 +1,21 @@
 {
   "overrides": [
     {
-      // Use the @typescript-eslint/recommended-requiring-type-checking config for TypeScript files
       "extends": [
         "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
-      // Apply the overrides to TypeScript files only
       "files": ["*.ts", "*.tsx"],
-      // Use the tsconfig.json file to configure the parser
       "parserOptions": {
         "project": "tsconfig.json"
       }
     }
   ],
-  // Use the @typescript-eslint/parser to parse TypeScript files
   "parser": "@typescript-eslint/parser",
-  // Use the tsconfig.json file to configure the parser
   "parserOptions": {
     "project": "./tsconfig.json"
   },
-  // Enable the @typescript-eslint plugin
   "plugins": ["@typescript-eslint"],
-  // Extend the recommended rules from the @typescript-eslint plugin
   "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
-  // Configure additional rules
   "rules": {
     "@typescript-eslint/consistent-type-imports": "warn"
   }
