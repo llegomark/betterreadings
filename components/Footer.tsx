@@ -27,6 +27,7 @@ function TwitterLink() {
       rel="preconnect noopener noreferrer"
       className="group"
       aria-label="Visit Mark Anthony Llego's Twitter profile"
+      aria-describedby="twitter-link"
     >
       <SocialIcon platform="twitter" size={25} />
     </a>

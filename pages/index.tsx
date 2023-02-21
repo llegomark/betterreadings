@@ -187,6 +187,7 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Visit Mark Anthony Llego's Github profile"
+          aria-describedby="github-link"
         >
           <SocialIcon platform="github" size={25} />
           <p>Star on Github</p>
@@ -196,7 +197,10 @@ const Home: NextPage = () => {
             Take Your Students&apos; Reading Skills to the Next Level
           </Balancer>
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-normal text-slate-900 sm:mt-12 sm:text-lg lg:text-lg">
+        <p
+          className="mx-auto mt-6 max-w-xl text-base leading-normal text-slate-900 sm:mt-12 sm:text-lg lg:text-lg"
+          aria-label="Reading Passages"
+        >
           <Balancer>
             Our reading passages are tailored to each student&apos;s grade level
             and designed to improve their reading skills, comprehension, and
@@ -228,6 +232,7 @@ const Home: NextPage = () => {
               placeholder={
                 "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
               }
+              aria-label="Enter a theme, subject matter, or content focus. (Leave blank to generate a random passage.)"
             />
             <p className="mt-2 text-right text-sm text-gray-500">
               {topic.length}/100
