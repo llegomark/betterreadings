@@ -1,13 +1,11 @@
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
-import localFont from "@next/font/local";
+import { Inter } from 'next/font/google';
 import { Provider } from "react-wrap-balancer";
 // Use the `localFont` function from the `@next/font` package to load the Inter font locally and generate a CSS class for it
-const inter = localFont({
-  src: "../styles/Inter-Light.ttf",
+const inter = Inter({
   weight: "300",
-  style: "normal",
-  display: "swap",
+  subsets: ["latin"],
 });
 // Define the `MyApp` component as a functional component that takes in a `Component` and `pageProps` prop
 function MyApp({ Component, pageProps }: AppProps) {

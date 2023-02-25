@@ -289,7 +289,7 @@ const Home: NextPage = () => {
                     <div
                       className="relative transform cursor-pointer rounded-xl border bg-sky-200 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-100 hover:shadow-lg"
                       onClick={() => {
-                        const passage = `\nAuthor: Mark Anthony Llego \n\n${generatedTopics}`;
+                        const passage = `\nBy: Mark Anthony Llego \n\n${generatedTopics}`;
                         navigator.clipboard
                           .writeText(passage)
                           .then(() => {
@@ -303,35 +303,6 @@ const Home: NextPage = () => {
                       }}
                     >
                       <p className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg">
-                        <span className="font-bold">Limit: </span>
-                        <span>
-                          You have {ratelimitRemaining} requests remaining
-                          today.
-                        </span>
-                        <br />
-                        <span className="font-bold">Author: </span>
-                        <a
-                          href="https://www.facebook.com/markllego/"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="underline"
-                        >
-                          Mark Anthony Llego
-                        </a>
-                        <br />
-                        <span className="font-bold">Email: </span>
-                        <a
-                          href="mailto:markllego@gmail.com"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="underline"
-                        >
-                          markllego@gmail.com
-                        </a>
-                        <br />
-                        <span className="font-bold">Level: </span>
-                        <span>{gradelevel}</span>
-                        <br />
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
@@ -381,6 +352,7 @@ const Home: NextPage = () => {
                         respect copyright law, plagiarism guidelines, and other
                         relevant ethical considerations.
                       </p>
+                      <h2 className="mb-2 font-bold">License:</h2>
                       <p className="mb-4">
                         The reading passages are licensed under a{" "}
                         <a
