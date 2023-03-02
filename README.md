@@ -103,18 +103,19 @@ let counter = 0;
 ```
 The function then sends a POST request to the OpenAI API with the given payload and API key. If the response is not successful, an error is thrown.
 ```
-const res = await fetch("https://api.openai.com/v1/completions", {
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${apiKey}`,
-  },
-  method: "POST",
-  body: JSON.stringify(payload),
-});
+    const res = await fetch("https://api.openai.com/v1/chat/completions", {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
 
-if (!res.ok) {
-  throw new Error(`Failed to fetch stream from OpenAI: ${res.statusText}`);
-}
+    // Throw an error if the response is not successful
+    if (!res.ok) {
+      throw new Error(`Failed to fetch stream from OpenAI: ${res.statusText}`);
+    }
 ```
 A ReadableStream object is then created that will continuously receive data from the response.
 ```
@@ -147,17 +148,17 @@ return stream;
 ```
 The start() method of the ReadableStream is an async function that is called when the stream is started. It defines a callback function onParse to handle incoming data. If the data is the "[DONE]" message, the stream is closed. If the data contains generated text, the text is extracted and enqueued as encoded binary data in the stream.
 ```
-try {
-  const parsedData = JSON.parse(data) as OpenAIResponse;
-  if (parsedData.choices && parsedData.choices.length > 0) {
-    const choice = parsedData.choices[0];
-    if (choice && choice.text) {
-      text = choice.text;
-    }
-  }
-} catch (e) {
-  console.error(e);
-}
+            try {
+              const parsedData = JSON.parse(data) as OpenAIResponse;
+              if (parsedData.choices && parsedData.choices.length > 0) {
+                const choice = parsedData.choices[0];
+                if (choice && choice.delta?.content) {
+                  text = choice.delta.content;
+                }
+              }
+            } catch (e) {
+              console.error(e);
+            }
 ```
 The cancel() method of the ReadableStream is an async function that is called when the stream is cancelled. It cancels the response if the stream is closed or an error occurs.
 ```
