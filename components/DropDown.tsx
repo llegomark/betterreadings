@@ -28,6 +28,8 @@ interface DropDownProps {
   setGradelevel: (gradelevel: GradelevelType) => void;
 }
 
+const GRADELEVEL_ID = "grade-level-dropdown";
+
 export const DropDown: React.FC<DropDownProps> = ({
   gradelevel,
   setGradelevel,
@@ -51,7 +53,7 @@ export const DropDown: React.FC<DropDownProps> = ({
     <Menu
       as="div"
       className="relative block w-full text-left"
-      key={`dropdown-${gradelevel}-${Math.random()}`}
+      key={`${GRADELEVEL_ID}-${gradelevel}`}
     >
       <div>
         {/* The Menu.Button element renders the main button of the dropdown, which displays the currently selected grade level. */}
