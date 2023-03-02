@@ -57,7 +57,7 @@ export const DropDown: React.FC<DropDownProps> = ({
     >
       <div>
         {/* The Menu.Button element renders the main button of the dropdown, which displays the currently selected grade level. */}
-        <Menu.Button className="inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
+        <Menu.Button className="inline-flex w-full items-center justify-between rounded-md border border-gray-300 bg-neutral-50 px-4 py-2 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-black">
           {gradelevel}
           <ChevronUpIcon
             className="-mr-1 ml-2 h-5 w-5 ui-open:hidden"
@@ -90,8 +90,8 @@ export const DropDown: React.FC<DropDownProps> = ({
                   <button
                     onClick={() => setGradelevel(gradelevelItem)}
                     className={`flex w-full items-center justify-between space-x-2 px-4 py-2 text-left text-sm ${
-                      active ? "bg-gray-100 text-gray-900" : "text-gray-700"
-                    } ${gradelevel === gradelevelItem ? "bg-gray-200" : ""}`}
+                      active ? "bg-neutral-50 text-gray-900" : "text-gray-700"
+                    } ${gradelevel === gradelevelItem ? "bg-neutral-200" : ""}`}
                   >
                     <span>{gradelevelItem}</span>
                     {/* The CheckIcon component displays a checkmark next to the currently selected grade level. */}

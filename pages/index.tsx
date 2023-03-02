@@ -190,7 +190,7 @@ const Home: NextPage = () => {
       <Header href="/" />
       <main className="sm:mt-15 mt-12 flex flex-1 flex-col items-center justify-center px-4 text-center">
         <a
-          className="mb-10 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100"
+          className="mb-10 flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-neutral-50 px-4 py-2 text-sm text-slate-900 shadow-md transition-colors hover:bg-gray-100"
           href="/github"
           target="_blank"
           rel="noopener noreferrer"
@@ -236,7 +236,7 @@ const Home: NextPage = () => {
               onChange={(e) => setTopic(e.target.value)}
               onInput={limitCharacters}
               rows={4}
-              className="focus:shadow-outline mt-5 w-full rounded-lg shadow-sm focus:outline-none"
+              className="focus:shadow-outline mt-5 w-full rounded-lg shadow-sm focus:outline-none bg-neutral-50"
               placeholder={
                 "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
               }

@@ -23,7 +23,7 @@ class MyDocument extends Document {
           <meta property="og:image" content={IMAGE_URL} />
           <meta name="twitter:image" content={IMAGE_URL} />
         </Head>
-        <body>
+        <body className="bg-[#f5f5f5]">
           <Main />
           <NextScript />
         </body>
