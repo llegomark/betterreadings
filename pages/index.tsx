@@ -70,7 +70,10 @@ const Home: NextPage = () => {
     const [min, max] = wordCountRanges[gradelevel] || [];
     if (!min || !max) return "Invalid Category";
 
-    let prompt = `Write a ${min}-${max} word reading passage on "${topic}" for a ${gradelevel} student. `;
+    let prompt = topic
+      ? `Write a ${min}-${max} word reading passage on "${topic}" for a ${gradelevel} student. `
+      : `Write a ${min}-${max} word reading passage for a ${gradelevel} student. `;
+
     if (gradelevel === "Kindergarten") {
       prompt += `Following the adventures of a fictional character, use a fun and engaging title that is easy to remember and relevant to the story, and use clear and engaging language with simple vocabulary and sentence structures. Incorporate colorful visuals, such as illustrations or photographs, to hold students' attention and reinforce key concepts. Use basic vocabulary words that are familiar to Kindergarten students. Include 3-5 comprehension questions at the end, focused on basic concepts like identifying objects or matching words to pictures. The goal is to introduce Kindergarten students to the joy of reading and develop basic reading skills for future success.`;
     } else if (gradelevel === "Grade 1" || gradelevel === "Grade 2") {
@@ -78,6 +81,7 @@ const Home: NextPage = () => {
     } else {
       prompt += `Cover a wider range of topics and use more complex language and structure. Use a catchy title that is informative, attention-grabbing, and relevant to the topic. Use clear and engaging language with technical terms when appropriate. Reinforce key concepts with examples, analogies, and visuals, and highlight important vocabulary words with definitions. Include 5-8 comprehension questions at the end, covering various topics and using multiple-choice, short answer, and interactive elements. The questions should develop critical thinking and analysis skills, including interpretation and evaluation for future higher level coursework.`;
     }
+
     return prompt;
   };
 
@@ -274,7 +278,7 @@ const Home: NextPage = () => {
           </form>
         </div>
         <Toaster
-          position="top-center"
+          position="bottom-right"
           reverseOrder={false}
           toastOptions={{ duration: 2000 }}
         />
@@ -285,9 +289,8 @@ const Home: NextPage = () => {
               {generatedTopics && (
                 <>
                   <div>
-                    <h2
-                      className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
-                      <Balancer>Generated Passage</Balancer>
+                    <h2 className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
+                      <Balancer>Reading Passage</Balancer>
                     </h2>
                   </div>
                   <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 px-3">
@@ -298,22 +301,24 @@ const Home: NextPage = () => {
                         navigator.clipboard
                           .writeText(passage)
                           .then(() => {
-                            toast("Generated Passage Copied!", {
-                              icon: "✂️",
-                            });
+                            toast.success(
+                              "Generated Reading Passage Copied",
+                              {}
+                            );
                           })
                           .catch((error) => {
                             console.error(error);
                           });
                       }}
                     >
-                      <p className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg"
-                      ref={passageRef}
+                      <p
+                        className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg"
+                        ref={passageRef}
                       >
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <span className="font-bold">{line}</span>
+                              <span className="font-bold uppercase">{line}</span>
                             ) : (
                               line
                             )}
@@ -323,7 +328,7 @@ const Home: NextPage = () => {
                         <br />
                         <span className="font-bold">Hint: </span>
                         <span>
-                          Ready to copy the generated passage? Simply click it!
+                          Ready to copy the generated passage? Click on the box to copy it to your clipboard.
                         </span>
                       </p>
                     </div>
