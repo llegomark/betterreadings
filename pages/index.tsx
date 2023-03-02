@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Toaster, toast } from "react-hot-toast";
 import type { GradelevelType } from "../components/DropDown";
 import { DropDown } from "../components/DropDown";
@@ -37,7 +37,14 @@ const Home: NextPage = () => {
   const [topic, setTopic] = useState<string>("");
   const [gradelevel, setGradelevel] = useState<GradelevelType>("Kindergarten");
   const [generatedTopics, setGeneratedTopics] = useState<string>("");
-  const [ratelimitRemaining, setRatelimitRemaining] = useState<string>("");
+
+  const passageRef = useRef<null | HTMLDivElement>(null);
+
+  const scrollToPassage = () => {
+    if (passageRef.current !== null) {
+      passageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   type WordCountRanges = {
     [key in string]: [number, number];
@@ -130,9 +137,6 @@ const Home: NextPage = () => {
       return;
     }
 
-    // Set the ratelimitRemaining state to the value of the X-Ratelimit-Remaining header
-    setRatelimitRemaining(response.headers.get("X-Ratelimit-Remaining") || "");
-
     // Read the response body as a stream and update the generated topics state with each chunk of data
     const data = response.body;
     if (!data) {
@@ -149,7 +153,7 @@ const Home: NextPage = () => {
       const chunkValue = decoder.decode(value);
       setGeneratedTopics((prev) => prev + chunkValue);
     }
-
+    scrollToPassage(); // Scroll to the generated passage
     setLoading(false); // Set the loading state to false once the response is fully received
   };
 
@@ -281,7 +285,8 @@ const Home: NextPage = () => {
               {generatedTopics && (
                 <>
                   <div>
-                    <h2 className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
+                    <h2
+                      className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
                       <Balancer>Generated Passage</Balancer>
                     </h2>
                   </div>
@@ -302,7 +307,9 @@ const Home: NextPage = () => {
                           });
                       }}
                     >
-                      <p className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg">
+                      <p className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg"
+                      ref={passageRef}
+                      >
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
