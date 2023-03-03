@@ -71,15 +71,29 @@ const Home: NextPage = () => {
     if (!min || !max) return "Invalid Category";
 
     let prompt = topic
-      ? `Write a ${min}-${max} word reading passage on "${topic}" for a ${gradelevel} student. `
-      : `Write a ${min}-${max} word reading passage for a ${gradelevel} student. `;
+      ? `Please generate a ${min}-${max} word count reading passage suitable for ${gradelevel} students on the topic of ${topic}. `
+      : `Please generate a ${min}-${max} word count reading passage suitable for ${gradelevel} students. `;
 
     if (gradelevel === "Kindergarten") {
       prompt += `Following the adventures of a fictional character, use a fun and engaging title that is easy to remember and relevant to the story, and use clear and engaging language with simple vocabulary and sentence structures. Incorporate colorful visuals, such as illustrations or photographs, to hold students' attention and reinforce key concepts. Use basic vocabulary words that are familiar to Kindergarten students. Include 3-5 comprehension questions at the end, focused on basic concepts like identifying objects or matching words to pictures. The goal is to introduce Kindergarten students to the joy of reading and develop basic reading skills for future success.`;
-    } else if (gradelevel === "Grade 1" || gradelevel === "Grade 2") {
-      prompt += `Use a catchy title that is informative, attention-grabbing, and relevant to the topic. Use clear and simple language with short sentences, avoiding technical terms or complex structures. Use illustrations and images to aid understanding, and examples or analogies to make concepts easier to understand. Highlight important vocabulary words with definitions, and include 4-5 comprehension questions at the end, covering various topics and using multiple-choice and interactive elements to build critical thinking and analysis skills for future coursework.`;
+    } else if (
+      gradelevel === "Grade 1" ||
+      gradelevel === "Grade 2" ||
+      gradelevel === "Grade 3" ||
+      gradelevel === "Grade 4" ||
+      gradelevel === "Grade 5" ||
+      gradelevel === "Grade 6"
+    ) {
+      prompt += `Use a catchy title that is informative, attention-grabbing, and relevant to the topic. Use clear and simple language with short sentences, avoiding technical terms or complex structures. Incorporate examples or analogies to make concepts easier to understand. Highlight important vocabulary words with definitions, and include 10 comprehension questions at the end, covering various topics and using multiple-choice and interactive elements to build critical thinking and analysis skills for future coursework. Your goal is to engage students in the joy of reading while developing their reading skills.`;
+    } else if (
+      gradelevel === "Grade 7" ||
+      gradelevel === "Grade 8" ||
+      gradelevel === "Grade 9" ||
+      gradelevel === "Grade 10"
+    ) {
+      prompt += `Use a catchy title that is informative, attention-grabbing, and relevant to the topic. Use clear and engaging language with varied sentence structures and vocabulary appropriate for the grade level. Use examples, analogies, and visuals to reinforce key concepts. Include 10-15 comprehension questions at the end, covering various topics and using multiple-choice, short answer, and interactive elements. The questions should develop critical thinking and analysis skills, including interpretation and evaluation, to prepare students for future higher level coursework.`;
     } else {
-      prompt += `Cover a wider range of topics and use more complex language and structure. Use a catchy title that is informative, attention-grabbing, and relevant to the topic. Use clear and engaging language with technical terms when appropriate. Reinforce key concepts with examples, analogies, and visuals, and highlight important vocabulary words with definitions. Include 5-8 comprehension questions at the end, covering various topics and using multiple-choice, short answer, and interactive elements. The questions should develop critical thinking and analysis skills, including interpretation and evaluation for future higher level coursework.`;
+      prompt += `Cover a wider range of topics and use more complex language and structure. Use a catchy title that is informative, attention-grabbing, and relevant to the topic. Use clear and engaging language with technical terms when appropriate. Reinforce key concepts with examples, analogies, and visuals, and highlight important vocabulary words with definitions. Include 10 comprehension questions at the end, covering various topics and using multiple-choice, short answer, and interactive elements. The questions should develop critical thinking and analysis skills, including interpretation and evaluation for future higher level coursework.`;
     }
 
     return prompt;
@@ -236,7 +250,7 @@ const Home: NextPage = () => {
               onChange={(e) => setTopic(e.target.value)}
               onInput={limitCharacters}
               rows={4}
-              className="focus:shadow-outline mt-5 w-full rounded-lg shadow-sm focus:outline-none bg-neutral-50"
+              className="focus:shadow-outline mt-5 w-full rounded-lg bg-neutral-50 shadow-sm focus:outline-none"
               placeholder={
                 "For example, the topics could be: The Impact of Climate Change on Our Planet, Shakespeare's Romeo and Juliet, The Life Cycle of a Butterfly, Saving Water and Energy, Planet Mars, or Orange Fruit."
               }
@@ -318,7 +332,9 @@ const Home: NextPage = () => {
                         {lines.map((line, index) => (
                           <React.Fragment key={index}>
                             {index === 0 ? (
-                              <span className="font-bold uppercase">{line}</span>
+                              <span className="font-bold uppercase">
+                                {line}
+                              </span>
                             ) : (
                               line
                             )}
@@ -328,7 +344,8 @@ const Home: NextPage = () => {
                         <br />
                         <span className="font-bold">Hint: </span>
                         <span>
-                          Ready to copy the generated passage? Click on the box to copy it to your clipboard.
+                          Ready to copy the generated passage? Click on the box
+                          to copy it to your clipboard.
                         </span>
                       </p>
                     </div>
