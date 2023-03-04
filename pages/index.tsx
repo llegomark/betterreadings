@@ -1,4 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRef, useState } from "react";
@@ -8,10 +7,10 @@ import { DropDown } from "../components/DropDown";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import LoadingDots from "../components/LoadingDots";
-import ResizablePanel from "../components/ResizablePanel";
 import Balancer from "react-wrap-balancer";
 import React from "react";
 import SocialIcon from "../components/SocialIcon";
+import UsageGuidelines from "../components/UsageGuidelines";
 
 // This defines the types of data that the API response should have
 interface ResponseType {
@@ -259,7 +258,7 @@ const Home: NextPage = () => {
             <p className="mt-2 text-right text-sm text-gray-500">
               {topic.length}/100
             </p>
-            <div className="align-items-center mt-10 flex items-center">
+            <div className="align-items-center mt-5 flex items-center">
               <span className="leading-zero flex h-6 w-6 items-center justify-center rounded-full bg-black p-2 text-center text-white">
                 2
               </span>
@@ -275,7 +274,7 @@ const Home: NextPage = () => {
             </div>
             {!loading && (
               <button
-                className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base font-bold text-white transition-colors hover:bg-black/80"
+                className="mt-5 w-full rounded-lg bg-black px-4 py-2 text-base font-bold text-white transition-colors hover:bg-black/80"
                 type="submit"
               >
                 Generate Passage &rarr;
@@ -283,7 +282,7 @@ const Home: NextPage = () => {
             )}
             {loading && (
               <button
-                className="mt-10 w-full rounded-lg bg-black px-4 py-2 text-base text-white"
+                className="mt-5 w-full rounded-lg bg-black px-4 py-2 text-base text-white"
                 disabled
               >
                 <LoadingDots color="white" style="large" />
@@ -297,124 +296,56 @@ const Home: NextPage = () => {
           toastOptions={{ duration: 2000 }}
         />
         <hr className="border-1 h-px bg-gray-700 dark:bg-gray-700" />
-        <ResizablePanel>
-          <AnimatePresence mode="wait">
-            <motion.div className="my-10 space-y-10">
-              {generatedTopics && (
-                <>
-                  <div>
-                    <h2 className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
-                      <Balancer>Reading Passage</Balancer>
-                    </h2>
-                  </div>
-                  <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 px-3">
-                    <div
-                      className="relative transform cursor-pointer rounded-xl border bg-sky-200 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-100 hover:shadow-lg"
-                      onClick={() => {
-                        const passage = `\nBy: Mark Anthony Llego \n\n${generatedTopics}`;
-                        navigator.clipboard
-                          .writeText(passage)
-                          .then(() => {
-                            toast.success(
-                              "Generated Reading Passage Copied",
-                              {}
-                            );
-                          })
-                          .catch((error) => {
-                            console.error(error);
-                          });
-                      }}
-                    >
-                      <p
-                        className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg"
-                        ref={passageRef}
-                      >
-                        {lines.map((line, index) => (
-                          <React.Fragment key={index}>
-                            {index === 0 ? (
-                              <span className="font-bold uppercase">
-                                {line}
-                              </span>
-                            ) : (
-                              line
-                            )}
-                            <br />
-                          </React.Fragment>
-                        ))}
+        <div className="my-10 space-y-10">
+          {generatedTopics && (
+            <>
+              <div>
+                <h2 className="mx-auto max-w-4xl px-3 text-2xl font-bold text-slate-900 md:text-3xl lg:text-4xl">
+                  <Balancer>Reading Passage</Balancer>
+                </h2>
+              </div>
+              <div className="mx-auto flex max-w-xl flex-col items-center justify-center space-y-8 px-3">
+                <div
+                  className="relative transform cursor-pointer rounded-xl border bg-sky-200 p-4 shadow-md transition-all duration-300 ease-in-out hover:-translate-y-1 hover:bg-sky-100 hover:shadow-lg"
+                  onClick={() => {
+                    const passage = `\nBy: Mark Anthony Llego \n\n${generatedTopics}`;
+                    navigator.clipboard
+                      .writeText(passage)
+                      .then(() => {
+                        toast.success("Generated Reading Passage Copied", {});
+                      })
+                      .catch((error) => {
+                        console.error(error);
+                      });
+                  }}
+                >
+                  <p
+                    className="text-start text-base leading-normal text-slate-900 sm:text-lg lg:text-lg"
+                    ref={passageRef}
+                  >
+                    {lines.map((line, index) => (
+                      <React.Fragment key={index}>
+                        {index === 0 ? (
+                          <span className="font-bold uppercase">{line}</span>
+                        ) : (
+                          line
+                        )}
                         <br />
-                        <span className="font-bold">Hint: </span>
-                        <span>
-                          Ready to copy the generated passage? Click on the box
-                          to copy it to your clipboard.
-                        </span>
-                      </p>
-                    </div>
-                    <div className="mt-2 rounded-lg bg-yellow-200 p-4 text-start text-base text-slate-900 sm:text-lg lg:text-lg">
-                      <h2 className="mb-2 font-bold">Usage Guidelines:</h2>
-                      <p className="mb-4">
-                        The generated reading passages are intended for
-                        educational use only. They are not to be used for
-                        commercial purposes or distributed for profit.
-                      </p>
-                      <p className="mb-4">
-                        Users are not allowed to remove the author title from
-                        the reading passages. This ensures that credit is given
-                        to the creators of the content and helps to protect
-                        their intellectual property rights.
-                      </p>
-                      <p className="mb-4">
-                        The reading passages may be used by teachers, students,
-                        or parents for non-commercial educational purposes. They
-                        may be used in the classroom, for homeschooling, or for
-                        personal study.
-                      </p>
-                      <p className="mb-4">
-                        Users are encouraged to use the reading passages
-                        creatively, incorporating them into lesson plans,
-                        activities, or assessments. However, the passages should
-                        not be altered in a way that changes their original
-                        meaning or intent.
-                      </p>
-                      <p className="mb-4">
-                        The reading passages are not to be used for any illegal,
-                        unethical, or inappropriate activities. Users should
-                        respect copyright law, plagiarism guidelines, and other
-                        relevant ethical considerations.
-                      </p>
-                      <h2 className="mb-2 font-bold">License:</h2>
-                      <p className="mb-4">
-                        The reading passages are licensed under a{" "}
-                        <a
-                          href="https://creativecommons.org/licenses/by-nc-nd/4.0/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-blue-600 hover:text-blue-800"
-                        >
-                          Creative Commons
-                          Attribution-NonCommercial-NoDerivatives 4.0
-                          International License
-                        </a>
-                        . This means that users are free to share, copy, and
-                        redistribute the material in any medium or format, as
-                        long as they give appropriate credit to the creators, do
-                        not use the material for commercial purposes, and do not
-                        modify or adapt the material in any way.
-                      </p>
-                      <p>
-                        In addition to these guidelines, users are granted a
-                        creative license to use the generated reading passages
-                        in their own unique and creative ways. However, users
-                        should always respect the original intent and meaning of
-                        the passages, and avoid using them in any way that could
-                        be harmful, inappropriate, or unethical.
-                      </p>
-                    </div>
-                  </div>
-                </>
-              )}
-            </motion.div>
-          </AnimatePresence>
-        </ResizablePanel>
+                      </React.Fragment>
+                    ))}
+                    <br />
+                    <span className="font-bold">Hint: </span>
+                    <span>
+                      Ready to copy the generated passage? Click on the box to
+                      copy it to your clipboard.
+                    </span>
+                  </p>
+                </div>
+                <UsageGuidelines />
+              </div>
+            </>
+          )}
+        </div>
       </main>
       <Footer />
     </div>
