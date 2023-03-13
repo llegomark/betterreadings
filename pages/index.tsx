@@ -275,7 +275,7 @@ const Home: NextPage = () => {
             {!loading && (
               <button
                 className="mt-5 w-full rounded-lg bg-black px-4 py-2 text-base font-bold text-white transition-colors hover:bg-black/80"
-                type="submit"
+                type="button"
               >
                 Generate Passage &rarr;
               </button>

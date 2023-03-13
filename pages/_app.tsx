@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google';
 import { Provider } from "react-wrap-balancer";
 // Use the `localFont` function from the `@next/font` package to load the Inter font locally and generate a CSS class for it
 const inter = Inter({
-  weight: "300",
+  weight: "400",
   subsets: ["latin"],
 });
 // Define the `MyApp` component as a functional component that takes in a `Component` and `pageProps` prop
